@@ -1,0 +1,59 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&family=Nunito&family=Rubik&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+  }
+
+  :root {
+    --primary: white;
+    --secondary: black;
+  }
+  img,
+  svg,
+  video,
+  canvas,
+  audio,
+  iframe,
+  embed,
+  object {
+    display: inline;
+    vertical-align: baseline;
+  }
+}
+
+@layer components {
+  .image-container {
+    /*  */
+    @apply relative w-full overflow-hidden pt-[56.25%];
+  }
+  .image {
+    /* h-full  */
+    @apply absolute inset-0 block max-h-full w-full max-w-full object-cover;
+  }
+  .icon {
+    @apply cursor-pointer rounded-full bg-slate-200 p-1 text-3xl hover:bg-slate-300 active:bg-slate-400;
+  }
+  .btn {
+    @apply cursor-pointer border-none px-5 py-2 font-rubik text-base outline-none hover:transition-all hover:duration-500 hover:ease-in-out;
+  }
+  .btn-nav {
+    @apply h-full text-black text-opacity-80 hover:text-opacity-100;
+  }
+  .btn-calltoaction {
+    @apply ml-3 rounded-3xl bg-black px-5 py-2 text-white text-opacity-90 hover:text-opacity-100 hover:opacity-75;
+  }
+  .btn-outline {
+    @apply rounded-md border border-solid border-[var(--secondary)] bg-[var(--secondary)] px-5 py-2 text-[var(--primary)] transition-all duration-300 ease-out hover:bg-[var(--primary)] hover:text-[var(--secondary)];
+  }
+  .btn-small {
+    @apply mx-1 h-full rounded-md bg-[#023047] px-2 py-1 text-lg text-white;
+  }
+}
