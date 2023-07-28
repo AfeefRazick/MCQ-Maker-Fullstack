@@ -8,7 +8,7 @@ import {
   MCQBuilderContext,
   MCQBuilderDispatchContext,
 } from "../pages/MCQBuilderPage/MCQbuilderContext"
-import actions from "../pages/MCQBuilderPage/constants"
+import { actions } from "../pages/MCQBuilderPage/constants"
 
 export const Mcq = ({ index, mcqid }) => {
   const mcqList = useContext(MCQBuilderContext)
@@ -45,7 +45,7 @@ export const Mcq = ({ index, mcqid }) => {
   return (
     <div className="relative w-full bg-white">
       <div
-        className="my-3 w-[calc(100%-50px)] rounded-2xl border border-solid border-black px-2 py-1"
+        className="my-3 w-[calc(100%-40px)] rounded-xl border border-solid border-black px-2 py-1"
         id="mcq-1"
       >
         <QuestionBuilder
@@ -78,7 +78,7 @@ export const Mcq = ({ index, mcqid }) => {
           <BiDuplicate className="icon bg-transparent" />
         </div>
       </div>
-      <div className="absolute right-0 top-0 mr-2 mt-4 w-8">
+      <div className="mr absolute right-0 top-0 mt-4 w-8">
         <AiOutlinePlus onClick={addQuestion} className="icon plus" />
         <BiImageAdd className="icon addimage" />
       </div>

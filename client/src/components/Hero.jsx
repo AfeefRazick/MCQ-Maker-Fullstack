@@ -21,7 +21,7 @@ export default function Hero() {
           linkpath="/mcq-builder"
         >
           Start designing for free
-          <TbEdit className="relative top-1 ml-1 text-xl" />
+          <TbEdit className="relative ml-1 text-xl" />
         </Button>
       </div>
     </div>

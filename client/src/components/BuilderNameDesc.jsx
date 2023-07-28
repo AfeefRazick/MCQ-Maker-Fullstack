@@ -29,15 +29,15 @@ export const BuilderNameDesc = ({ information, setInformation }) => {
   }
 
   return (
-    <div className="w-full">
+    <div className="mr-10 mt-5 w-[calc(100%-40px)] border border-solid border-black pb-5">
       <input
-        className="m-3 w-full border-b-2 border-main pb-2 text-3xl outline-none focus:border-solid"
+        className="m-3 w-11/12 border-b-2 border-main pb-2 text-3xl outline-none focus:border-solid"
         placeholder="MCQ Name"
         value={mcqName}
         onChange={updateName}
       />
       <input
-        className="mx-3 w-full border-b-2 border-main pb-2 text-slate-700 outline-none focus:border-solid"
+        className="mx-3 w-11/12 border-b-2 border-main pb-2 text-slate-700 outline-none focus:border-solid"
         placeholder="Description"
         value={mcqDescription}
         onChange={updateDescription}

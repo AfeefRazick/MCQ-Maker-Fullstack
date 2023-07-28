@@ -1,4 +1,4 @@
-const actions = {
+export const actions = {
   UPDATEANSWER: "updateanswer",
   UPDATEQUESTION: "updatequestion",
   ADDQUESTION: "addquestion",
@@ -6,5 +6,5 @@ const actions = {
   DELETEQUESTION: "deletequestion",
   DELETEANSWER: "deleteanswer",
 }
-
-export default actions
+export const serverUrl = ""
+export const clientUrl = "https://afeefrazick.github.io/MCQ-Maker/"

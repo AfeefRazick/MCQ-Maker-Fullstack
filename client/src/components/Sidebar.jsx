@@ -72,7 +72,7 @@ export default function Sidebar() {
               linkpath="/mcq-builder"
             >
               Lets Design
-              <TbEdit className="relative top-1 ml-1 text-xl" />
+              <TbEdit className="relative  ml-1 text-xl" />
             </Button>
           </div>
         </div>

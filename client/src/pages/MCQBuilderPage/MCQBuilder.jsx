@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid"
 import Axios from "axios"
-import { useReducer, useState } from "react"
+import { useEffect, useReducer, useState } from "react"
 import { Mcq } from "../../components/Mcq"
 import {
   MCQBuilderContext,
@@ -8,7 +8,7 @@ import {
 } from "./MCQbuilderContext"
 import { MCQUrlModal } from "../../components/MCQUrlModal"
 import { BuilderOptions } from "../../components/BuilderOptions"
-import actions from "./constants"
+import { actions, clientUrl } from "./constants"
 import { BuilderNameDesc } from "../../components/BuilderNameDesc"
 
 // reducer function is used to change the state. arguements taken are the state and an action object
@@ -103,6 +103,13 @@ export const MCQBuilder = () => {
   })
   const [mce_id, setMce_id] = useState("")
   const [showModal, setShowModal] = useState(false)
+  const [updated, setUpdated] = useState(false)
+
+  useEffect(() => {
+    setUpdated(false)
+  }, [mcqList, information])
+
+  console.log(updated)
 
   const sendCreateMCE = () => {
     Axios.post("http://localhost:3002/createmce", {
@@ -112,6 +119,7 @@ export const MCQBuilder = () => {
       console.log(response)
       setMce_id(response.data._id)
       setShowModal(true)
+      setUpdated(true)
     })
   }
 
@@ -121,6 +129,7 @@ export const MCQBuilder = () => {
       information: information,
       mcqArray: mcqList,
     }).then((response) => {
+      setUpdated(true)
       console.log(response.data)
     })
   }
@@ -132,6 +141,7 @@ export const MCQBuilder = () => {
           sendUpdateMCE={sendUpdateMCE}
           sendCreateMCE={sendCreateMCE}
           mce_id={mce_id}
+          updated={updated}
         />
 
         <div className="relative mt-16 flex flex-col items-center px-[4%] md:mt-20 md:px-[6%] lg:px-[8%] xl:px-[10%]">
@@ -141,9 +151,9 @@ export const MCQBuilder = () => {
             mce_id={mce_id}
           />
           {mce_id !== "" && (
-            <div className="flex w-full justify-center bg-black px-2">
+            <div className="flex w-full justify-center rounded-b-lg bg-black px-2">
               <p className="no-scrollbar select-all overflow-x-scroll whitespace-nowrap  py-1 text-center text-main underline">
-                {"https://afeefrazick.github.io/MCQ-Maker/" + mce_id}
+                {clientUrl + mce_id}
               </p>
             </div>
           )}

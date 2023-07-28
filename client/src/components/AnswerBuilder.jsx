@@ -6,7 +6,7 @@ import {
   MCQBuilderContext,
   MCQBuilderDispatchContext,
 } from "../pages/MCQBuilderPage/MCQbuilderContext"
-import actions from "../pages/MCQBuilderPage/constants"
+import { actions } from "../pages/MCQBuilderPage/constants"
 
 export const AnswerBuilder = ({
   mcqid,

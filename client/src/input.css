@@ -31,18 +31,16 @@
 
 @layer components {
   .image-container {
-    /*  */
     @apply relative w-full overflow-hidden pt-[56.25%];
   }
   .image {
-    /* h-full  */
     @apply absolute inset-0 block max-h-full w-full max-w-full object-cover;
   }
   .icon {
     @apply cursor-pointer rounded-full bg-slate-200 p-1 text-3xl hover:bg-slate-300 active:bg-slate-400;
   }
   .btn {
-    @apply cursor-pointer border-none px-5 py-2 font-rubik text-base outline-none hover:transition-all hover:duration-500 hover:ease-in-out;
+    @apply flex cursor-pointer items-center border-none px-5 py-2 font-rubik text-base outline-none hover:transition-all hover:duration-500 hover:ease-in-out;
   }
   .btn-nav {
     @apply h-full text-black text-opacity-80 hover:text-opacity-100;
@@ -54,7 +52,7 @@
     @apply rounded-md border border-solid border-[var(--secondary)] bg-[var(--secondary)] px-5 py-2 text-[var(--primary)] transition-all duration-300 ease-out hover:bg-[var(--primary)] hover:text-[var(--secondary)];
   }
   .btn-small {
-    @apply mx-1 h-full rounded-md bg-[#023047] px-2 py-1 text-lg text-white;
+    @apply h-full rounded-md bg-[#023047] px-2 py-1 text-lg text-white;
   }
 }
 @layer utilities {
@@ -67,5 +65,28 @@
   .no-scrollbar {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
+  }
+  .border-animation {
+    animation: border-animation 800ms infinite;
+    outline-offset: -3px;
+    border-radius: 8px;
+  }
+  @keyframes border-animation {
+    0% {
+      outline: gray dotted 3px;
+      border: 3px dashed transparent;
+    }
+    33% {
+      outline: transparent dashed 3px;
+      border: 3px dotted black;
+    }
+    66% {
+      outline: gray dotted 3px;
+      border: 3px dashed transparent;
+    }
+    100% {
+      outline: transparent dashed 3px;
+      border: 3px dotted black;
+    }
   }
 }

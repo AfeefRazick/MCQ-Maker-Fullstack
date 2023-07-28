@@ -39,6 +39,14 @@ export default {
             "border-color": "black",
           },
         },
+        rotate: {
+          "0%": {
+            transform: "rotate(0deg)",
+          },
+          "100%": {
+            transform: "rotate(-360deg)",
+          },
+        },
       },
       animation: {
         typeanim: "typing 3s steps(50),blink 0.5s step-end 5 alternate",

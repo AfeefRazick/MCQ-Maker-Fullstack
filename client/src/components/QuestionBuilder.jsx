@@ -5,7 +5,7 @@ import {
   // MCQBuilderContext,
   MCQBuilderDispatchContext,
 } from "../pages/MCQBuilderPage/MCQbuilderContext"
-import actions from "../pages/MCQBuilderPage/constants"
+import { actions } from "../pages/MCQBuilderPage/constants"
 
 export const QuestionBuilder = ({ mcqid, questionIndex, text }) => {
   const quest = useRef("")

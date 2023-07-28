@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { FaTimes } from "react-icons/fa"
 import { useEffect, useRef } from "react"
+import { clientUrl } from "../pages/MCQBuilderPage/constants"
 
 export const MCQUrlModal = ({ showModal, setShowModal, mce_id }) => {
   const dialog = useRef(false)
@@ -38,7 +39,7 @@ export const MCQUrlModal = ({ showModal, setShowModal, mce_id }) => {
           e.target.select()
         }}
         className="mt-10 w-full select-all border-b border-solid border-slate-400 py-0.5 text-cyan-700 outline-none focus:border-b-2 focus:border-main"
-        value={"https://afeefrazick.github.io/MCQ-Maker/" + mce_id}
+        value={clientUrl + mce_id}
       ></input>
     </dialog>
   )
