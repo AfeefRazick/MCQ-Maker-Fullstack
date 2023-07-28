@@ -5,7 +5,7 @@ import {
   // MCQBuilderContext,
   MCQBuilderDispatchContext,
 } from "../pages/MCQBuilderPage/MCQbuilderContext"
-import { ACTIONS } from "../pages/MCQBuilderPage/MCQBuilder"
+import actions from "../pages/MCQBuilderPage/constants"
 
 export const QuestionBuilder = ({ mcqid, questionIndex, text }) => {
   const quest = useRef("")
@@ -25,7 +25,7 @@ export const QuestionBuilder = ({ mcqid, questionIndex, text }) => {
     setRows(rownum)
     //
     dispatch({
-      type: ACTIONS.UPDATEQUESTION,
+      type: actions.UPDATEQUESTION,
       payload: {
         questionId: mcqid,
         questionIndex: questionIndex,

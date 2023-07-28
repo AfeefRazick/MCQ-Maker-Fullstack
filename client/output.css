@@ -735,6 +735,10 @@ img,
   margin: auto;
 }
 
+.m-3{
+  margin: 0.75rem;
+}
+
 .mx-1{
   margin-left: 0.25rem;
   margin-right: 0.25rem;
@@ -760,6 +764,11 @@ img,
   margin-bottom: 0.75rem;
 }
 
+.mx-3{
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+}
+
 .ml-1{
   margin-left: 0.25rem;
 }
@@ -782,6 +791,10 @@ img,
 
 .mt-4{
   margin-top: 1rem;
+}
+
+.mt-5{
+  margin-top: 1.25rem;
 }
 
 .flex{
@@ -820,10 +833,6 @@ img,
   height: 100vh;
 }
 
-.h-20{
-  height: 5rem;
-}
-
 .w-10{
   width: 2.5rem;
 }
@@ -856,10 +865,6 @@ img,
   width: 85vw;
 }
 
-.w-\[90\%\]{
-  width: 90%;
-}
-
 .w-\[calc\(100\%-50px\)\]{
   width: calc(100% - 50px);
 }
@@ -868,16 +873,18 @@ img,
   width: 100%;
 }
 
-.w-screen{
-  width: 100vw;
-}
-
 .max-w-3xl{
   max-width: 48rem;
 }
 
 .cursor-pointer{
   cursor: pointer;
+}
+
+.select-all{
+  -webkit-user-select: all;
+     -moz-user-select: all;
+          user-select: all;
 }
 
 .resize-none{
@@ -924,6 +931,14 @@ img,
   overflow-y: hidden;
 }
 
+.overflow-x-scroll{
+  overflow-x: scroll;
+}
+
+.whitespace-nowrap{
+  white-space: nowrap;
+}
+
 .rounded-2xl{
   border-radius: 1rem;
 }
@@ -946,6 +961,10 @@ img,
 
 .border-0{
   border-width: 0px;
+}
+
+.border-2{
+  border-width: 2px;
 }
 
 .border-b{
@@ -986,6 +1005,11 @@ img,
 
 .border-transparent{
   border-color: transparent;
+}
+
+.border-main{
+  --tw-border-opacity: 1;
+  border-color: rgb(34 211 238 / var(--tw-border-opacity));
 }
 
 .bg-black{
@@ -1029,6 +1053,11 @@ img,
   padding-right: 0.75rem;
 }
 
+.px-\[4\%\]{
+  padding-left: 4%;
+  padding-right: 4%;
+}
+
 .py-0{
   padding-top: 0px;
   padding-bottom: 0px;
@@ -1049,13 +1078,16 @@ img,
   padding-bottom: 0.5rem;
 }
 
-.py-5{
-  padding-top: 1.25rem;
-  padding-bottom: 1.25rem;
+.pt-0{
+  padding-top: 0px;
 }
 
 .pt-1{
   padding-top: 0.25rem;
+}
+
+.pb-2{
+  padding-bottom: 0.5rem;
 }
 
 .text-left{
@@ -1140,13 +1172,32 @@ img,
   color: rgb(14 116 144 / var(--tw-text-opacity));
 }
 
+.text-main{
+  --tw-text-opacity: 1;
+  color: rgb(34 211 238 / var(--tw-text-opacity));
+}
+
 .text-white{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.text-slate-800{
+  --tw-text-opacity: 1;
+  color: rgb(30 41 59 / var(--tw-text-opacity));
+}
+
+.text-slate-700{
+  --tw-text-opacity: 1;
+  color: rgb(51 65 85 / var(--tw-text-opacity));
+}
+
 .text-opacity-60{
   --tw-text-opacity: 0.6;
+}
+
+.underline{
+  text-decoration-line: underline;
 }
 
 .placeholder-black::-moz-placeholder{
@@ -1196,6 +1247,21 @@ img,
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
 .hover\:cursor-pointer:hover{
   cursor: pointer;
 }
@@ -1210,9 +1276,22 @@ img,
   background-color: rgb(203 213 225 / var(--tw-bg-opacity));
 }
 
+.focus\:border-b-2:focus{
+  border-bottom-width: 2px;
+}
+
+.focus\:border-solid:focus{
+  border-style: solid;
+}
+
 .focus\:border-black:focus{
   --tw-border-opacity: 1;
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
+}
+
+.focus\:border-main:focus{
+  --tw-border-opacity: 1;
+  border-color: rgb(34 211 238 / var(--tw-border-opacity));
 }
 
 .focus\:outline-0:focus{
@@ -1226,6 +1305,10 @@ img,
 
   .sm\:block{
     display: block;
+  }
+
+  .sm\:w-11\/12{
+    width: 91.666667%;
   }
 
   .sm\:p-8{
@@ -1361,9 +1444,9 @@ img,
     padding-right: 4rem;
   }
 
-  .md\:px-\[2\%\]{
-    padding-left: 2%;
-    padding-right: 2%;
+  .md\:px-\[6\%\]{
+    padding-left: 6%;
+    padding-right: 6%;
   }
 
   .md\:py-3{
@@ -1380,6 +1463,11 @@ img,
   .lg\:px-20{
     padding-left: 5rem;
     padding-right: 5rem;
+  }
+
+  .lg\:px-\[8\%\]{
+    padding-left: 8%;
+    padding-right: 8%;
   }
 
   .lg\:py-4{
@@ -1412,9 +1500,9 @@ img,
     padding-right: 15rem;
   }
 
-  .xl\:px-\[2\%\]{
-    padding-left: 2%;
-    padding-right: 2%;
+  .xl\:px-\[10\%\]{
+    padding-left: 10%;
+    padding-right: 10%;
   }
 
   .xl\:py-5{

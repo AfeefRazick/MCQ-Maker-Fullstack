@@ -7,6 +7,7 @@ export const MCQUrlModal = ({ showModal, setShowModal, mce_id }) => {
   useEffect(() => {
     if (showModal && !dialog.current.open) {
       dialog.current.showModal()
+      dialog.current.focus()
     } else if (!showModal && dialog.current.open) {
       dialog.current.close()
     }
@@ -33,10 +34,12 @@ export const MCQUrlModal = ({ showModal, setShowModal, mce_id }) => {
       </p>
       <input
         readOnly
-        className="text-cyan-700 mt-10 w-full border-b border-solid border-slate-400 py-0.5 outline-none"
+        onClick={(e) => {
+          e.target.select()
+        }}
+        className="mt-10 w-full select-all border-b border-solid border-slate-400 py-0.5 text-cyan-700 outline-none focus:border-b-2 focus:border-main"
         value={"https://afeefrazick.github.io/MCQ-Maker/" + mce_id}
       ></input>
     </dialog>
   )
 }
-//make a top part that always shows the link

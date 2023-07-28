@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import { v4 as uuidv4 } from "uuid"
 import { AiOutlinePlus, AiOutlineDelete } from "react-icons/ai"
 import { BiImageAdd, BiMessageSquareAdd, BiDuplicate } from "react-icons/bi"
 import { AnswerBuilder } from "./AnswerBuilder"
@@ -9,15 +8,15 @@ import {
   MCQBuilderContext,
   MCQBuilderDispatchContext,
 } from "../pages/MCQBuilderPage/MCQbuilderContext"
-import { ACTIONS } from "../pages/MCQBuilderPage/MCQBuilder"
+import actions from "../pages/MCQBuilderPage/constants"
 
-export const MCQ = ({ index, mcqid }) => {
+export const Mcq = ({ index, mcqid }) => {
   const mcqList = useContext(MCQBuilderContext)
   const dispatch = useContext(MCQBuilderDispatchContext)
 
   const addQuestion = () => {
     dispatch({
-      type: ACTIONS.ADDQUESTION,
+      type: actions.ADDQUESTION,
       payload: {
         questionId: mcqid,
         questionIndex: index,
@@ -26,7 +25,7 @@ export const MCQ = ({ index, mcqid }) => {
   }
   const addAnswer = () => {
     dispatch({
-      type: ACTIONS.ADDANSWER,
+      type: actions.ADDANSWER,
       payload: {
         questionId: mcqid,
         questionIndex: index,
@@ -36,7 +35,7 @@ export const MCQ = ({ index, mcqid }) => {
 
   const deleteQuestion = () => {
     dispatch({
-      type: ACTIONS.DELETEQUESTION,
+      type: actions.DELETEQUESTION,
       payload: {
         questionId: mcqid,
         questionIndex: index,

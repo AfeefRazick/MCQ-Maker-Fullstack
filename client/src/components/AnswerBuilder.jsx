@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import { ACTIONS } from "../pages/MCQBuilderPage/MCQBuilder"
 import { useContext, useRef } from "react"
 import { FaTimes } from "react-icons/fa"
 import { FiCircle } from "react-icons/fi"
@@ -7,6 +6,7 @@ import {
   MCQBuilderContext,
   MCQBuilderDispatchContext,
 } from "../pages/MCQBuilderPage/MCQbuilderContext"
+import actions from "../pages/MCQBuilderPage/constants"
 
 export const AnswerBuilder = ({
   mcqid,
@@ -21,7 +21,7 @@ export const AnswerBuilder = ({
 
   const updateState = () => {
     dispatch({
-      type: ACTIONS.UPDATEANSWER,
+      type: actions.UPDATEANSWER,
       payload: {
         questionId: mcqid,
         answerId: answerid,
@@ -33,7 +33,7 @@ export const AnswerBuilder = ({
   }
   const deleteAnswer = () => {
     dispatch({
-      type: ACTIONS.DELETEANSWER,
+      type: actions.DELETEANSWER,
       payload: {
         questionId: mcqid,
         answerId: answerid,

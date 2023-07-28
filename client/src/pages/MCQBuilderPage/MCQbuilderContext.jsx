@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext } from "react"
 
-export const MCQBuilderContext = createContext(null);
-export const MCQBuilderDispatchContext = createContext(null);
+export const MCQBuilderContext = createContext(null)
+export const MCQBuilderDispatchContext = createContext(null)

@@ -1,26 +1,20 @@
 import { v4 as uuidv4 } from "uuid"
 import Axios from "axios"
 import { useReducer, useState } from "react"
-import { MCQ } from "../../components/MCQ"
+import { Mcq } from "../../components/Mcq"
 import {
   MCQBuilderContext,
   MCQBuilderDispatchContext,
 } from "./MCQbuilderContext"
 import { MCQUrlModal } from "../../components/MCQUrlModal"
 import { BuilderOptions } from "../../components/BuilderOptions"
-import Sidebar from "../../components/Sidebar"
+import actions from "./constants"
+import { BuilderNameDesc } from "../../components/BuilderNameDesc"
 
-export const ACTIONS = {
-  UPDATEANSWER: "updateanswer",
-  UPDATEQUESTION: "updatequestion",
-  ADDQUESTION: "addquestion",
-  ADDANSWER: "addanswer",
-  DELETEQUESTION: "deletequestion",
-  DELETEANSWER: "deleteanswer",
-}
 // reducer function is used to change the state. arguements taken are the state and an action object
 // the action object has a action.type, indicating which action has been taken to update the state accordingly
 // the action.payload passed provides the (some new)data need to change the state appropriately
+
 function newMCQ() {
   return { id: uuidv4(), question: { text: "" }, answers: [newAnswer()] }
 }
@@ -28,14 +22,14 @@ function newAnswer() {
   return { id: uuidv4(), text: "" }
 }
 
-function reducer(mcqs, action) {
+const reducer = (mcqs, action) => {
   let tempMCQs = mcqs
   switch (action.type) {
-    case ACTIONS.ADDQUESTION:
+    case actions.ADDQUESTION:
       tempMCQs.splice(action.payload.questionIndex + 1, 0, newMCQ())
       return [...tempMCQs]
 
-    case ACTIONS.ADDANSWER:
+    case actions.ADDANSWER:
       return mcqs.map((mcq) => {
         if (mcq.id === action.payload.questionId) {
           return {
@@ -47,12 +41,12 @@ function reducer(mcqs, action) {
         }
       })
 
-    case ACTIONS.DELETEQUESTION:
+    case actions.DELETEQUESTION:
       tempMCQs.splice(action.payload.questionIndex, 1)
 
       return [...tempMCQs]
 
-    case ACTIONS.DELETEANSWER:
+    case actions.DELETEANSWER:
       return mcqs.map((mcq) => {
         if (mcq.id === action.payload.questionId) {
           let answers = mcq.answers.map((x) => x)
@@ -66,7 +60,7 @@ function reducer(mcqs, action) {
         }
       })
 
-    case ACTIONS.UPDATEQUESTION:
+    case actions.UPDATEQUESTION:
       return mcqs.map((mcq) => {
         if (mcq.id === action.payload.questionId) {
           return {
@@ -77,7 +71,7 @@ function reducer(mcqs, action) {
           return mcq
         }
       })
-    case ACTIONS.UPDATEANSWER:
+    case actions.UPDATEANSWER:
       return mcqs.map((mcq) => {
         if (mcq.id === action.payload.questionId) {
           return {
@@ -99,15 +93,20 @@ function reducer(mcqs, action) {
       return mcqs
   }
 }
+
 export const MCQBuilder = () => {
   // mcqlist object is the state that represents all the mcqs, question and answers
   const [mcqList, dispatch] = useReducer(reducer, [newMCQ()])
+  const [information, setInformation] = useState({
+    name: "Untitled MCQ",
+    mcqDescription: "",
+  })
   const [mce_id, setMce_id] = useState("")
   const [showModal, setShowModal] = useState(false)
 
   const sendCreateMCE = () => {
     Axios.post("http://localhost:3002/createmce", {
-      name: "WEB SEM 100",
+      information: information,
       mcqArray: mcqList,
     }).then((response) => {
       console.log(response)
@@ -117,7 +116,13 @@ export const MCQBuilder = () => {
   }
 
   const sendUpdateMCE = () => {
-    Axios.put("http://localhost:3002/updatemce", {})
+    Axios.put("http://localhost:3002/updatemce", {
+      id: mce_id,
+      information: information,
+      mcqArray: mcqList,
+    }).then((response) => {
+      console.log(response.data)
+    })
   }
 
   return (
@@ -126,25 +131,34 @@ export const MCQBuilder = () => {
         <BuilderOptions
           sendUpdateMCE={sendUpdateMCE}
           sendCreateMCE={sendCreateMCE}
+          mce_id={mce_id}
         />
-        <div className="relative mt-10 flex flex-col items-center md:mt-16">
-          {/* {mceUrl && (
-            <dialog className="flex h-screen w-screen items-center justify-center">
-              {mceUrl._id}
-            </dialog>
-          )} */}
+
+        <div className="relative mt-16 flex flex-col items-center px-[4%] md:mt-20 md:px-[6%] lg:px-[8%] xl:px-[10%]">
           <MCQUrlModal
             showModal={showModal}
             setShowModal={setShowModal}
             mce_id={mce_id}
           />
+          {mce_id !== "" && (
+            <div className="flex w-full justify-center bg-black px-2">
+              <p className="no-scrollbar select-all overflow-x-scroll whitespace-nowrap  py-1 text-center text-main underline">
+                {"https://afeefrazick.github.io/MCQ-Maker/" + mce_id}
+              </p>
+            </div>
+          )}
+
+          <BuilderNameDesc
+            information={information}
+            setInformation={setInformation}
+          />
 
           <div
-            className="mt-10 flex h-auto w-[90%] flex-col items-center justify-center rounded-xl py-5 md:px-[2%] xl:px-[2%]"
+            className=" mt-5 flex h-auto w-full flex-col items-center justify-center rounded-xl "
             id="mcq-container"
           >
             {mcqList.map((mcq, index) => {
-              return <MCQ key={mcq.id} mcqid={mcq.id} index={index} />
+              return <Mcq key={mcq.id} mcqid={mcq.id} index={index} />
             })}
           </div>
         </div>
