@@ -89,6 +89,9 @@ const reducer = (mcqs, action) => {
           return mcq
         }
       })
+    case actions.SETINITIAL:
+      return [...action.payload.mcqList]
+
     default:
       return mcqs
   }
