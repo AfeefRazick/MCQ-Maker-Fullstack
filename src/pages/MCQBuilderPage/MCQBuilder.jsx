@@ -89,6 +89,12 @@ const reducer = (mcqs, action) => {
           return mcq
         }
       })
+    case actions.DUPLICATEQUESTION:
+      tempMCQs.splice(action.payload.questionIndex, 0, {
+        ...mcqs[action.payload.questionIndex],
+        id: uuidv4(),
+      })
+      return [...tempMCQs]
     case actions.SETINITIAL:
       return [...action.payload.mcqList]
 
@@ -111,8 +117,6 @@ export const MCQBuilder = () => {
   useEffect(() => {
     setUpdated(false)
   }, [mcqList, information])
-
-  console.log(updated)
 
   const sendCreateMCE = () => {
     Axios.post(import.meta.env.VITE_SERVER_URL + "/createmce", {

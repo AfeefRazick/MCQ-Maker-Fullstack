@@ -5,5 +5,6 @@ export const actions = {
   ADDANSWER: "addanswer",
   DELETEQUESTION: "deletequestion",
   DELETEANSWER: "deleteanswer",
+  DUPLICATEQUESTION: "duplicatemcq",
   SETINITIAL: "setinitialmcqstate",
 }

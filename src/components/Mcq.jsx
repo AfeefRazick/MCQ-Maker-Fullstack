@@ -42,6 +42,15 @@ export const Mcq = ({ index, mcqid }) => {
       },
     })
   }
+  const duplicateQuestion = () => {
+    dispatch({
+      type: actions.DUPLICATEQUESTION,
+      payload: {
+        questionId: mcqid,
+        questionIndex: index,
+      },
+    })
+  }
   return (
     <div className="group/mcq relative w-full bg-white">
       <div
@@ -77,7 +86,10 @@ export const Mcq = ({ index, mcqid }) => {
                 className="icon bg-transparent"
               />
             )}
-            <BiDuplicate className="icon bg-transparent" />
+            <BiDuplicate
+              onClick={duplicateQuestion}
+              className="icon bg-transparent"
+            />
           </div>
         </div>
       </div>
