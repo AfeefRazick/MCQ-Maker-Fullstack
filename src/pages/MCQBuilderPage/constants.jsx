@@ -7,5 +7,3 @@ export const actions = {
   DELETEANSWER: "deleteanswer",
   SETINITIAL: "setinitialmcqstate",
 }
-export const serverUrl = ""
-export const clientUrl = "https://afeefrazick.github.io/MCQ-Maker/"

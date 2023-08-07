@@ -5,7 +5,6 @@ import { AiOutlineCloudUpload, AiOutlineEye } from "react-icons/ai"
 import { IoLinkOutline } from "react-icons/io5"
 import { Link } from "react-router-dom"
 import { CgCarousel } from "react-icons/cg"
-import { clientUrl } from "../pages/MCQBuilderPage/constants"
 
 export const BuilderOptions = ({
   sendCreateMCE,
@@ -19,7 +18,7 @@ export const BuilderOptions = ({
   }, [mce_id])
 
   return (
-    <div className="fixed top-0 z-10 flex h-16 w-full justify-center border-b border-solid border-slate-200 md:h-20">
+    <div className="fixed top-0 z-10 flex h-16 w-full justify-center border-b border-solid border-slate-200 bg-white md:h-20">
       <div className="flex h-full w-full items-center justify-between px-2 sm:w-11/12">
         <div className="flex items-center">
           <Link
@@ -37,7 +36,7 @@ export const BuilderOptions = ({
           {mceCreated && (
             <a
               target="blank"
-              href={clientUrl + mce_id}
+              href={import.meta.env.VITE_CLIENT_URL + mce_id}
               className="mx-2 flex items-center"
             >
               <AiOutlineEye className="rounded-full p-1 text-4xl hover:bg-slate-200" />

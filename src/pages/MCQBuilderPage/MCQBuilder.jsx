@@ -8,7 +8,7 @@ import {
 } from "./MCQbuilderContext"
 import { MCQUrlModal } from "../../components/MCQUrlModal"
 import { BuilderOptions } from "../../components/BuilderOptions"
-import { actions, clientUrl } from "./constants"
+import { actions } from "./constants"
 import { BuilderNameDesc } from "../../components/BuilderNameDesc"
 
 // reducer function is used to change the state. arguements taken are the state and an action object
@@ -115,7 +115,7 @@ export const MCQBuilder = () => {
   console.log(updated)
 
   const sendCreateMCE = () => {
-    Axios.post("http://localhost:3002/createmce", {
+    Axios.post(import.meta.env.VITE_SERVER_URL + "/createmce", {
       information: information,
       mcqArray: mcqList,
     }).then((response) => {
@@ -127,7 +127,7 @@ export const MCQBuilder = () => {
   }
 
   const sendUpdateMCE = () => {
-    Axios.put("http://localhost:3002/updatemce", {
+    Axios.put(import.meta.env.VITE_SERVER_URL + "/updatemce", {
       id: mce_id,
       information: information,
       mcqArray: mcqList,
@@ -156,7 +156,7 @@ export const MCQBuilder = () => {
           {mce_id !== "" && (
             <div className="flex w-full justify-center rounded-b-lg bg-black px-2">
               <p className="no-scrollbar select-all overflow-x-scroll whitespace-nowrap  py-1 text-center text-main underline">
-                {clientUrl + mce_id}
+                {import.meta.env.VITE_CLIENT_URL + mce_id}
               </p>
             </div>
           )}

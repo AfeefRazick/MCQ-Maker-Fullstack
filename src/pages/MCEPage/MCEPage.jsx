@@ -3,17 +3,15 @@ import { useParams } from "react-router-dom"
 import Axios from "axios"
 import { Loading } from "../../components/Loading"
 // import { v4 as uuidv4 } from "uuid"
-import { Mcq } from "../../components/Mcq"
 
 // import { actions, clientUrl } from "./constants"
-import { BuilderNameDesc } from "../../components/BuilderNameDesc"
 import {
   MCQBuilderContext,
   MCQBuilderDispatchContext,
 } from "../MCQBuilderPage/MCQbuilderContext"
 import { actions } from "../MCQBuilderPage/constants"
-
-export const SERVER_URL = "http://localhost:3002"
+import { McqReadOnly } from "../../components/McqReadOnly"
+import { ReadNameDesc } from "../../components/ReadNameDesc"
 
 export const MCEPage = () => {
   const { mceid } = useParams()
@@ -27,17 +25,19 @@ export const MCEPage = () => {
   })
 
   useEffect(() => {
-    Axios.get(SERVER_URL + "/" + mceid).then((response) => {
-      let data = response.data
-      setLoading(false)
-      dispatch({
-        type: actions.SETINITIAL,
-        payload: {
-          mcqList: data.mcqArray,
-        },
-      })
-      setInformation(data.information)
-    })
+    Axios.get(import.meta.env.VITE_SERVER_URL + "/" + mceid).then(
+      (response) => {
+        let data = response.data
+        setLoading(false)
+        dispatch({
+          type: actions.SETINITIAL,
+          payload: {
+            mcqList: data.mcqArray,
+          },
+        })
+        setInformation(data.information)
+      }
+    )
   }, [])
 
   // const setInitialMcqList = ()=>{
@@ -50,20 +50,7 @@ export const MCEPage = () => {
     <MCQBuilderContext.Provider value={mcqList}>
       <MCQBuilderDispatchContext.Provider value={dispatch}>
         <div className="relative mt-16 flex flex-col items-center px-[4%] md:mt-20 md:px-[6%] lg:px-[8%] xl:px-[10%]">
-          {/* <MCQUrlModal
-            showModal={showModal}
-            setShowModal={setShowModal}
-            mce_id={mce_id}
-          /> */}
-          {/* {mce_id !== "" && (
-            <div className="flex w-full justify-center rounded-b-lg bg-black px-2">
-              <p className="no-scrollbar select-all overflow-x-scroll whitespace-nowrap  py-1 text-center text-main underline">
-                {clientUrl + mce_id}
-              </p>
-            </div>
-          )} */}
-
-          <BuilderNameDesc
+          <ReadNameDesc
             information={information}
             setInformation={setInformation}
           />
@@ -73,7 +60,7 @@ export const MCEPage = () => {
             id="mcq-container"
           >
             {mcqList.map((mcq, index) => {
-              return <Mcq key={mcq.id} mcqid={mcq.id} index={index} />
+              return <McqReadOnly key={mcq.id} mcqid={mcq.id} index={index} />
             })}
           </div>
         </div>
@@ -87,7 +74,7 @@ export const MCEPage = () => {
 // the action.payload passed provides the (some new)data need to change the state appropriately
 
 const reducer = (mcqs, action) => {
-  let tempMCQs = mcqs
+  // let tempMCQs = mcqs
   switch (action.type) {
     case actions.UPDATEQUESTION:
       return mcqs.map((mcq) => {

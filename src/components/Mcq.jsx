@@ -43,8 +43,9 @@ export const Mcq = ({ index, mcqid }) => {
     })
   }
   return (
-    <div className="relative w-full bg-white">
+    <div className="group/mcq relative w-full bg-white">
       <div
+        tabIndex={"0"}
         className="my-3 w-[calc(100%-40px)] rounded-xl border border-solid border-black px-2 py-1"
         id="mcq-1"
       >
@@ -68,16 +69,19 @@ export const Mcq = ({ index, mcqid }) => {
         })}
 
         <BiMessageSquareAdd onClick={addAnswer} className="icon plus-ans" />
-        <div className="mx-auto mt-2 flex w-11/12 justify-end border-t border-solid border-slate-300 pt-1">
-          {mcqList.length > 1 && (
-            <AiOutlineDelete
-              onClick={deleteQuestion}
-              className="icon bg-transparent"
-            />
-          )}
-          <BiDuplicate className="icon bg-transparent" />
+        <div className="mx-auto mt-2 grid w-11/12 grid-rows-[0fr] justify-end  border-solid border-slate-300 pt-1 transition-all  group-focus-within/mcq:grid-rows-[1fr] group-focus-within/mcq:border-t ">
+          <div className="overflow-hidden">
+            {mcqList.length > 1 && (
+              <AiOutlineDelete
+                onClick={deleteQuestion}
+                className="icon bg-transparent"
+              />
+            )}
+            <BiDuplicate className="icon bg-transparent" />
+          </div>
         </div>
       </div>
+
       <div className="mr absolute right-0 top-0 mt-4 w-8">
         <AiOutlinePlus onClick={addQuestion} className="icon plus" />
         <BiImageAdd className="icon addimage" />

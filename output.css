@@ -799,6 +799,10 @@ img,
   display: flex;
 }
 
+.grid{
+  display: grid;
+}
+
 .hidden{
   display: none;
 }
@@ -863,6 +867,10 @@ img,
   width: 85vw;
 }
 
+.w-\[calc\(100\%-30px\)\]{
+  width: calc(100% - 30px);
+}
+
 .w-\[calc\(100\%-40px\)\]{
   width: calc(100% - 40px);
 }
@@ -891,6 +899,10 @@ img,
 
 .resize{
   resize: both;
+}
+
+.grid-rows-\[0fr\]{
+  grid-template-rows: 0fr;
 }
 
 .flex-col{
@@ -966,10 +978,6 @@ img,
   border-width: 0px;
 }
 
-.border-2{
-  border-width: 2px;
-}
-
 .border-\[3px\]{
   border-width: 3px;
 }
@@ -980,10 +988,6 @@ img,
 
 .border-b-2{
   border-bottom-width: 2px;
-}
-
-.border-t{
-  border-top-width: 1px;
 }
 
 .border-solid{
@@ -1155,16 +1159,6 @@ img,
   line-height: 1.75rem;
 }
 
-.text-6xl{
-  font-size: 3.75rem;
-  line-height: 1;
-}
-
-.text-5xl{
-  font-size: 3rem;
-  line-height: 1;
-}
-
 .font-bold{
   font-weight: 700;
 }
@@ -1259,6 +1253,21 @@ img,
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+input[type="radio"] {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid black;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+input[type="radio"]:checked {
+  background: radial-gradient(#000 30%, transparent 50%);
+}
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 
 .no-scrollbar::-webkit-scrollbar {
@@ -1316,18 +1325,6 @@ img,
   background-color: rgb(203 213 225 / var(--tw-bg-opacity));
 }
 
-.hover\:opacity-50:hover{
-  opacity: 0.5;
-}
-
-.hover\:opacity-80:hover{
-  opacity: 0.8;
-}
-
-.hover\:opacity-70:hover{
-  opacity: 0.7;
-}
-
 .focus\:border-b-2:focus{
   border-bottom-width: 2px;
 }
@@ -1350,7 +1347,20 @@ img,
   outline-width: 0px;
 }
 
+.group\/mcq:focus-within .group-focus-within\/mcq\:grid-rows-\[1fr\]{
+  grid-template-rows: 1fr;
+}
+
+.group\/mcq:focus-within .group-focus-within\/mcq\:border-t{
+  border-top-width: 1px;
+}
+
 @media (min-width: 600px){
+  .sm\:mx-3{
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+  }
+
   .sm\:mt-12{
     margin-top: 3rem;
   }
@@ -1508,6 +1518,11 @@ img,
   .md\:py-3{
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
+  }
+
+  .md\:text-lg{
+    font-size: 1.125rem;
+    line-height: 1.75rem;
   }
 }
 

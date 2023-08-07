@@ -56,6 +56,19 @@
   }
 }
 @layer utilities {
+  input[type="radio"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid black;
+    border-radius: 100%;
+    cursor: pointer;
+  }
+
+  input[type="radio"]:checked {
+    background: radial-gradient(#000 30%, transparent 50%);
+  }
+
   /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
