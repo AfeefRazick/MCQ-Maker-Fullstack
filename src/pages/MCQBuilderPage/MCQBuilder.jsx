@@ -11,12 +11,101 @@ import { BuilderOptions } from "../../components/BuilderOptions"
 import { actions } from "./constants"
 import { BuilderNameDesc } from "../../components/BuilderNameDesc"
 
-// reducer function is used to change the state. arguements taken are the state and an action object
-// the action object has a action.type, indicating which action has been taken to update the state accordingly
-// the action.payload passed provides the (some new)data need to change the state appropriately
+export const MCQBuilder = () => {
+  // mcqlist object is the state that represents all the mcqs, question and answers
+  const [mcqList, dispatch] = useReducer(reducer, [newMCQ()])
+  const [information, setInformation] = useState({
+    name: "Untitled MCQ",
+    mcqDescription: "",
+  })
+  const [mce_id, setMce_id] = useState("")
+  const [showModal, setShowModal] = useState(false)
+  const [updated, setUpdated] = useState(false)
+
+  useEffect(() => {
+    setUpdated(false)
+  }, [mcqList, information])
+
+  const sendCreateMCE = () => {
+    Axios.post(import.meta.env.VITE_SERVER_URL + "/createmce", {
+      information: information,
+      mcqArray: mcqList,
+    }).then((response) => {
+      console.log(response)
+      setMce_id(response.data._id)
+      setShowModal(true)
+      setUpdated(true)
+    })
+  }
+
+  const sendUpdateMCE = () => {
+    Axios.put(import.meta.env.VITE_SERVER_URL + "/updatemce", {
+      id: mce_id,
+      information: information,
+      mcqArray: mcqList,
+    }).then((response) => {
+      setUpdated(true)
+      console.log(response.data)
+    })
+  }
+
+  return (
+    <MCQBuilderContext.Provider value={mcqList}>
+      <MCQBuilderDispatchContext.Provider value={dispatch}>
+        <BuilderOptions
+          sendUpdateMCE={sendUpdateMCE}
+          sendCreateMCE={sendCreateMCE}
+          mce_id={mce_id}
+          updated={updated}
+        />
+
+        <div className="relative mt-16 flex flex-col items-center px-[4%] md:mt-20 md:px-[6%] lg:px-[8%] xl:px-[10%]">
+          <MCQUrlModal
+            showModal={showModal}
+            setShowModal={setShowModal}
+            mce_id={mce_id}
+          />
+          {mce_id !== "" && (
+            <div className="flex w-full justify-center rounded-b-lg bg-black px-2">
+              <p className="no-scrollbar select-all overflow-x-scroll whitespace-nowrap  py-1 text-center text-main underline">
+                {import.meta.env.VITE_CLIENT_URL + mce_id}
+              </p>
+            </div>
+          )}
+
+          <BuilderNameDesc
+            information={information}
+            setInformation={setInformation}
+          />
+
+          <div
+            className=" mt-5 flex h-auto w-full flex-col items-center justify-center rounded-xl "
+            id="mcq-container"
+          >
+            {mcqList.map((mcq, index) => {
+              return (
+                <Mcq
+                  key={mcq.id}
+                  mcqObject={mcq}
+                  mcqid={mcq.id}
+                  index={index}
+                />
+              )
+            })}
+          </div>
+        </div>
+      </MCQBuilderDispatchContext.Provider>
+    </MCQBuilderContext.Provider>
+  )
+}
 
 function newMCQ() {
-  return { id: uuidv4(), question: { text: "" }, answers: [newAnswer()] }
+  return {
+    id: uuidv4(),
+    question: { text: "" },
+    correctAnswerId: 1,
+    answers: [newAnswer()],
+  }
 }
 function newAnswer() {
   return { id: uuidv4(), text: "" }
@@ -90,96 +179,34 @@ const reducer = (mcqs, action) => {
         }
       })
     case actions.DUPLICATEQUESTION:
-      tempMCQs.splice(action.payload.questionIndex, 0, {
+      tempMCQs.splice(action.payload.questionIndex + 1, 0, {
         ...mcqs[action.payload.questionIndex],
         id: uuidv4(),
       })
       return [...tempMCQs]
+
+    case actions.MCESELECTANSWER:
+      return mcqs.map((mcq) => {
+        if (mcq.id === action.payload.questionId) {
+          return {
+            ...mcq,
+            correctAnswerId: action.payload.answerId,
+            // answers: mcq.answers.map((answer) => {
+            //   if (answer.id === action.payload.answerId) {
+            //     return { ...answer, text: action.payload.text }
+            //   } else {
+            //     return answer
+            //   }
+            // }),
+          }
+        } else {
+          return mcq
+        }
+      })
     case actions.SETINITIAL:
       return [...action.payload.mcqList]
 
     default:
       return mcqs
   }
-}
-
-export const MCQBuilder = () => {
-  // mcqlist object is the state that represents all the mcqs, question and answers
-  const [mcqList, dispatch] = useReducer(reducer, [newMCQ()])
-  const [information, setInformation] = useState({
-    name: "Untitled MCQ",
-    mcqDescription: "",
-  })
-  const [mce_id, setMce_id] = useState("")
-  const [showModal, setShowModal] = useState(false)
-  const [updated, setUpdated] = useState(false)
-
-  useEffect(() => {
-    setUpdated(false)
-  }, [mcqList, information])
-
-  const sendCreateMCE = () => {
-    Axios.post(import.meta.env.VITE_SERVER_URL + "/createmce", {
-      information: information,
-      mcqArray: mcqList,
-    }).then((response) => {
-      console.log(response)
-      setMce_id(response.data._id)
-      setShowModal(true)
-      setUpdated(true)
-    })
-  }
-
-  const sendUpdateMCE = () => {
-    Axios.put(import.meta.env.VITE_SERVER_URL + "/updatemce", {
-      id: mce_id,
-      information: information,
-      mcqArray: mcqList,
-    }).then((response) => {
-      setUpdated(true)
-      console.log(response.data)
-    })
-  }
-
-  return (
-    <MCQBuilderContext.Provider value={mcqList}>
-      <MCQBuilderDispatchContext.Provider value={dispatch}>
-        <BuilderOptions
-          sendUpdateMCE={sendUpdateMCE}
-          sendCreateMCE={sendCreateMCE}
-          mce_id={mce_id}
-          updated={updated}
-        />
-
-        <div className="relative mt-16 flex flex-col items-center px-[4%] md:mt-20 md:px-[6%] lg:px-[8%] xl:px-[10%]">
-          <MCQUrlModal
-            showModal={showModal}
-            setShowModal={setShowModal}
-            mce_id={mce_id}
-          />
-          {mce_id !== "" && (
-            <div className="flex w-full justify-center rounded-b-lg bg-black px-2">
-              <p className="no-scrollbar select-all overflow-x-scroll whitespace-nowrap  py-1 text-center text-main underline">
-                {import.meta.env.VITE_CLIENT_URL + mce_id}
-              </p>
-            </div>
-          )}
-
-          <BuilderNameDesc
-            information={information}
-            setInformation={setInformation}
-          />
-
-          <div
-            className=" mt-5 flex h-auto w-full flex-col items-center justify-center rounded-xl "
-            id="mcq-container"
-          >
-            {mcqList.map((mcq, index) => {
-              return <Mcq key={mcq.id} mcqid={mcq.id} index={index} />
-            })}
-          </div>
-        </div>
-      </MCQBuilderDispatchContext.Provider>
-    </MCQBuilderContext.Provider>
-  )
 }

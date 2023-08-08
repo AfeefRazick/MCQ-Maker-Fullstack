@@ -29,7 +29,7 @@ export const BuilderNameDesc = ({ information, setInformation }) => {
   }
 
   return (
-    <div className="mr-10 mt-5 w-[calc(100%-40px)] border border-solid border-black pb-5">
+    <div className="mr-10 mt-5 w-[calc(100%-40px)] rounded-xl border border-solid border-black pb-5">
       <input
         className="m-3 w-11/12 border-b-2 border-main pb-2 text-3xl outline-none focus:border-solid"
         placeholder="MCQ Name"

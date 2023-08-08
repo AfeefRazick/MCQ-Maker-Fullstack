@@ -10,7 +10,7 @@ import {
 } from "../pages/MCQBuilderPage/MCQbuilderContext"
 import { actions } from "../pages/MCQBuilderPage/constants"
 
-export const Mcq = ({ index, mcqid }) => {
+export const Mcq = ({ index, mcqid, mcqObject }) => {
   const mcqList = useContext(MCQBuilderContext)
   const dispatch = useContext(MCQBuilderDispatchContext)
 
@@ -54,6 +54,9 @@ export const Mcq = ({ index, mcqid }) => {
   return (
     <div className="group/mcq relative w-full bg-white">
       <div
+        onFocus={(e) => {
+          e.target.firstElementChild?.firstElementChild?.focus?.()
+        }}
         tabIndex={"0"}
         className="my-3 w-[calc(100%-40px)] rounded-xl border border-solid border-black px-2 py-1"
         id="mcq-1"
@@ -66,6 +69,7 @@ export const Mcq = ({ index, mcqid }) => {
         {mcqList[index].answers.map((answer, i) => {
           return (
             <AnswerBuilder
+              correctAnswer={mcqObject.correctAnswerId === answer.id}
               mcqid={mcqid}
               answerid={answer.id}
               key={answer.id}

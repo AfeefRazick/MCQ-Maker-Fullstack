@@ -7,4 +7,5 @@ export const actions = {
   DELETEANSWER: "deleteanswer",
   DUPLICATEQUESTION: "duplicatemcq",
   SETINITIAL: "setinitialmcqstate",
+  MCESELECTANSWER: "selectAnswerIn_McePage/CorrectAnswerInBuilder",
 }

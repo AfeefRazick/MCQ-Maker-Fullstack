@@ -68,6 +68,10 @@
   input[type="radio"]:checked {
     background: radial-gradient(#000 30%, transparent 50%);
   }
+  input[type="radio"].green:checked {
+    border-color: #33dd11;
+    background: radial-gradient(#208b0b 30%, transparent 50%);
+  }
 
   /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
