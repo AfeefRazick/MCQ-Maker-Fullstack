@@ -3,6 +3,7 @@ import Home from "./pages/Home"
 import mainlinks from "./components/Linknames"
 import { MCQBuilder } from "./pages/MCQBuilderPage/MCQBuilder"
 import { MCEPage } from "./pages/MCEPage/MCEPage"
+import { SignUpPage } from "./pages/SignUpSignInPage/SignUpPage"
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
               ></Route>
             )
           })}
+          <Route path="/signup" element={<SignUpPage />}></Route>
         </Routes>
       </Router>
     </>

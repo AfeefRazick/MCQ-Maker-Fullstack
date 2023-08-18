@@ -18,11 +18,10 @@ export default {
       xl: "1200px",
     },
 
-    boxShadow: {
-      boxshadow: "0px 60px 10px 0px rgba(102, 104, 109, 0.17)",
-    },
-
     extend: {
+      boxShadow: {
+        boxshadow: "0px 60px 10px 0px rgba(102, 104, 109, 0.17)",
+      },
       colors: {
         main: "#22d3ee",
         yellow: "#ffea00",
@@ -59,6 +58,7 @@ export default {
         nunito: ["Nunito", "sans-serif"],
         rubik: ["Rubik", "sans-serif"],
         lato: ["Lato", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"],
       },
     },
   },

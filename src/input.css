@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato&family=Nunito&family=Rubik&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato&family=Nunito&family=Poppins&family=Rubik&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -46,7 +46,7 @@
     @apply h-full text-black text-opacity-80 hover:text-opacity-100;
   }
   .btn-calltoaction {
-    @apply ml-3 rounded-3xl bg-black px-5 py-2 text-white text-opacity-90 hover:text-opacity-100 hover:opacity-75;
+    @apply ml-3 rounded-3xl bg-black px-5 py-2 text-white hover:text-opacity-90 hover:opacity-75;
   }
   .btn-outline {
     @apply rounded-md border border-solid border-[var(--secondary)] bg-[var(--secondary)] px-5 py-2 text-[var(--primary)] transition-all duration-300 ease-out hover:bg-[var(--primary)] hover:text-[var(--secondary)];

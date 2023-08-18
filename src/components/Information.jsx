@@ -11,6 +11,7 @@ export default function Information() {
       {/* image-container */}
       <figure className="mt-10 w-4/5">
         <img
+          loading="lazy"
           src={designurl}
           alt="design page screenshot"
           // image

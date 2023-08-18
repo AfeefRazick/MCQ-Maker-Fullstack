@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { CgMenu } from "react-icons/cg"
-import { TbEdit } from "react-icons/tb"
+import { FiLogIn } from "react-icons/fi"
 import mainlinks from "./Linknames"
 import Button from "./Button"
 import { Logo } from "./Logo"
@@ -69,10 +69,10 @@ export default function Sidebar() {
             <Button
               className="hidden sm:block"
               buttonStyle="btn-calltoaction"
-              linkpath="/mcq-builder"
+              linkpath="/signup"
             >
-              Lets Design
-              <TbEdit className="relative  ml-1 text-xl" />
+              Sign Up
+              <FiLogIn className="relative  ml-1 text-xl" />
             </Button>
           </div>
         </div>

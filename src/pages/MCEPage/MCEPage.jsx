@@ -1,15 +1,16 @@
 import { useEffect, useState, useReducer } from "react"
 import { useParams } from "react-router-dom"
 import Axios from "axios"
-import { Loading } from "../../components/Loading"
+import { Loading } from "../../pages/Loading"
 import { actions } from "../MCQBuilderPage/constants"
 import { McqReadOnly } from "../../components/McqReadOnly"
 import { ReadNameDesc } from "../../components/ReadNameDesc"
 import { MCQReaderContext, MCQReaderDispatchContext } from "./MCQReaderContext"
+import { ErrorPage } from "../ErrorPage"
 
 export const MCEPage = () => {
   const { mceid } = useParams()
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState({ isLoading: true, error: false })
   // const [mce, setMce] = useState({})
 
   const [mcqList, dispatch] = useReducer(reducer, [])
@@ -19,10 +20,12 @@ export const MCEPage = () => {
   })
 
   useEffect(() => {
-    Axios.get(import.meta.env.VITE_SERVER_URL + "/" + mceid).then(
-      (response) => {
+    Axios.get(import.meta.env.VITE_SERVER_URL + "/" + mceid)
+      .then((response) => {
         let data = response.data
-        setLoading(false)
+        setLoading((prev) => {
+          return { ...prev, isLoading: false }
+        })
         dispatch({
           type: actions.SETINITIAL,
           payload: {
@@ -30,11 +33,17 @@ export const MCEPage = () => {
           },
         })
         setInformation(data.information)
-      }
-    )
+      })
+      .catch((err) => {
+        console.log(err)
+        setLoading((prev) => {
+          return { ...prev, isLoading: false, error: true }
+        })
+      })
   }, [])
 
-  if (loading) return <Loading />
+  if (loading.isLoading) return <Loading />
+  else if (loading.error) return <ErrorPage />
 
   return (
     <MCQReaderContext.Provider value={mcqList}>

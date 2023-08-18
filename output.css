@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato&family=Nunito&family=Rubik&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato&family=Nunito&family=Poppins&family=Rubik&display=swap");
 
 /*
 ! tailwindcss v3.3.2 | MIT License | https://tailwindcss.com
@@ -627,12 +627,12 @@ img,
   padding-right: 1.25rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+  --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-  --tw-text-opacity: 0.9;
 }
 
 .btn-calltoaction:hover{
-  --tw-text-opacity: 1;
+  --tw-text-opacity: 0.9;
   opacity: 0.75;
 }
 
@@ -729,10 +729,6 @@ img,
   margin: 0.75rem;
 }
 
-.m-5{
-  margin: 1.25rem;
-}
-
 .m-auto{
   margin: auto;
 }
@@ -765,6 +761,11 @@ img,
 .my-3{
   margin-top: 0.75rem;
   margin-bottom: 0.75rem;
+}
+
+.my-5{
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
 }
 
 .ml-1{
@@ -883,6 +884,10 @@ img,
   max-width: 48rem;
 }
 
+.max-w-lg{
+  max-width: 32rem;
+}
+
 .cursor-pointer{
   cursor: pointer;
 }
@@ -911,6 +916,10 @@ img,
 
 .flex-wrap{
   flex-wrap: wrap;
+}
+
+.place-items-center{
+  place-items: center;
 }
 
 .items-center{
@@ -999,6 +1008,11 @@ img,
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
+.border-gray-100{
+  --tw-border-opacity: 1;
+  border-color: rgb(243 244 246 / var(--tw-border-opacity));
+}
+
 .border-main{
   --tw-border-opacity: 1;
   border-color: rgb(34 211 238 / var(--tw-border-opacity));
@@ -1052,6 +1066,10 @@ img,
 
 .p-3{
   padding: 0.75rem;
+}
+
+.p-5{
+  padding: 1.25rem;
 }
 
 .px-2{
@@ -1115,6 +1133,10 @@ img,
 
 .font-nunito{
   font-family: Nunito, sans-serif;
+}
+
+.font-poppins{
+  font-family: Poppins, sans-serif;
 }
 
 .font-rubik{
@@ -1225,6 +1247,12 @@ img,
 .shadow-boxshadow{
   --tw-shadow: 0px 60px 10px 0px rgba(102, 104, 109, 0.17);
   --tw-shadow-colored: 0px 60px 10px 0px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.shadow-lg{
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
@@ -1380,6 +1408,10 @@ input[type="radio"].green:checked {
 
   .sm\:w-11\/12{
     width: 91.666667%;
+  }
+
+  .sm\:justify-center{
+    justify-content: center;
   }
 
   .sm\:p-8{
