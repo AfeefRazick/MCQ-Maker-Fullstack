@@ -27,7 +27,7 @@ export const MCQBuilder = () => {
   }, [mcqList, information])
 
   const sendCreateMCE = () => {
-    Axios.post(import.meta.env.VITE_SERVER_URL + "/createmce", {
+    Axios.post(import.meta.env.VITE_SERVER_URL + "/mce", {
       information: information,
       mcqArray: mcqList,
     }).then((response) => {
@@ -39,7 +39,7 @@ export const MCQBuilder = () => {
   }
 
   const sendUpdateMCE = () => {
-    Axios.put(import.meta.env.VITE_SERVER_URL + "/updatemce", {
+    Axios.put(import.meta.env.VITE_SERVER_URL + "/mce", {
       id: mce_id,
       information: information,
       mcqArray: mcqList,

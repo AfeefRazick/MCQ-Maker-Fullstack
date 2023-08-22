@@ -20,7 +20,7 @@ export const MCEPage = () => {
   })
 
   useEffect(() => {
-    Axios.get(import.meta.env.VITE_SERVER_URL + "/" + mceid)
+    Axios.get(import.meta.env.VITE_SERVER_URL + "/mce/" + mceid)
       .then((response) => {
         let data = response.data
         setLoading((prev) => {

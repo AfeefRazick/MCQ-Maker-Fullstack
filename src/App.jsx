@@ -4,6 +4,7 @@ import mainlinks from "./components/Linknames"
 import { MCQBuilder } from "./pages/MCQBuilderPage/MCQBuilder"
 import { MCEPage } from "./pages/MCEPage/MCEPage"
 import { SignUpPage } from "./pages/SignUpSignInPage/SignUpPage"
+import { Dashboard } from "./pages/DashboardPage/Dashboard"
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
             )
           })}
           <Route path="/signup" element={<SignUpPage />}></Route>
+          <Route path="/dashboard" element={<Dashboard />}></Route>
         </Routes>
       </Router>
     </>

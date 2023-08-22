@@ -3,13 +3,28 @@ import { useEffect, useReducer } from "react"
 import { authContext } from "./authContext"
 import { Loading } from "../pages/Loading"
 import * as authActionTypes from "./authActionTypes"
-import jwtDecode from "jwt-decode"
+import axios from "axios"
 
 const reducer = (auth, action) => {
   switch (action.type) {
     case authActionTypes.AUTO_LOGIN_LOADING:
       return { ...auth, isLoading: true, isAppLoaded: false }
-
+    case authActionTypes.LOGIN_WITH_OAUTH_SUCCESS:
+      // setstoragejwttoken
+      return {
+        ...auth,
+        isLoading: false,
+        isAppLoaded: true,
+        isAuthenticated: true,
+        user: { ...action.payload },
+      }
+    case authActionTypes.DELETE_USER_SUCCESS:
+      return {
+        ...auth,
+        isLoading: false,
+        isAuthenticated: false,
+        user: {},
+      }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`)
     }
@@ -23,9 +38,26 @@ export const AuthProvider = ({ children }) => {
     user: {},
     isAppLoaded: true,
   })
-  const handleCallbackResponse = (response) => {
-    console.log(response)
-    console.log(jwtDecode(response.credential))
+
+  const handleCallbackResponse = async (response) => {
+    const jwt = response.credential
+
+    let userFromDB = {
+      ...(await axios.get(import.meta.env.VITE_SERVER_URL + "/user/" + jwt)),
+    }.data
+
+    if (!userFromDB) {
+      userFromDB = {
+        ...(await axios.post(import.meta.env.VITE_SERVER_URL + "/user/create", {
+          credential: jwt,
+        })),
+      }.data
+    }
+
+    dispatch({
+      type: authActionTypes.LOGIN_WITH_OAUTH_SUCCESS,
+      payload: { credential: jwt, ...userFromDB },
+    })
   }
 
   useEffect(() => {
@@ -43,12 +75,12 @@ export const AuthProvider = ({ children }) => {
         )
       }
     }
-  })
+  }, [])
 
   if (!auth.isAppLoaded) {
     return <Loading />
   }
-
+  console.log(auth)
   return (
     <authContext.Provider value={{ auth, dispatch }}>
       {children}
