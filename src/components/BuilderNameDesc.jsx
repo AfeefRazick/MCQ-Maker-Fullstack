@@ -1,15 +1,14 @@
 /* eslint-disable react/prop-types */
 
-import { useState } from "react"
-
 export const BuilderNameDesc = ({ information, setInformation }) => {
-  const [mcqName, setMcqName] = useState(information.name)
-  const [mcqDescription, setMcqDescription] = useState(
-    information.mcqDescription
-  )
+  // const [mcqName, setMcqName] = useState(information.name)
+  // const [mcqDescription, setMcqDescription] = useState(
+  //   information.mcqDescription
+  // )
+  // console.log(mcqName)
   const updateName = (e) => {
     let name = e.target.value
-    setMcqName(name)
+    // setMcqName(name)
     setInformation((prev) => {
       return {
         ...prev,
@@ -19,7 +18,7 @@ export const BuilderNameDesc = ({ information, setInformation }) => {
   }
   const updateDescription = (e) => {
     let desc = e.target.value
-    setMcqDescription(desc)
+    // setMcqDescription(desc)
     setInformation((prev) => {
       return {
         ...prev,
@@ -33,13 +32,13 @@ export const BuilderNameDesc = ({ information, setInformation }) => {
       <input
         className="m-3 w-11/12 border-b-2 border-main pb-2 text-3xl outline-none focus:border-solid"
         placeholder="MCQ Name"
-        value={mcqName}
+        value={information.name}
         onChange={updateName}
       />
       <input
         className="mx-3 w-11/12 border-b-2 border-main pb-2 text-slate-700 outline-none focus:border-solid"
         placeholder="Description"
-        value={mcqDescription}
+        value={information.mcqDescription}
         onChange={updateDescription}
       />
     </div>

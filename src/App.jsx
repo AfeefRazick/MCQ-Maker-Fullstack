@@ -6,6 +6,7 @@ import { MCEPage } from "./pages/MCEPage/MCEPage"
 import { SignUpPage } from "./pages/SignUpSignInPage/SignUpPage"
 import { Dashboard } from "./pages/DashboardPage/Dashboard"
 import { PrivateRoutes } from "./components/PrivateRoutes"
+import { ErrorPage } from "./pages/ErrorPage"
 
 export default function App() {
   return (
@@ -15,7 +16,8 @@ export default function App() {
           <Route path="/" element={<Home />}></Route>
           <Route element={<PrivateRoutes />}>
             <Route path="/:mceid" element={<MCEPage />}></Route>
-            <Route path="/mcq-builder" element={<MCQBuilder />}></Route>
+            <Route path="/mcq-builder/:mceid" element={<MCQBuilder />}></Route>
+            <Route path="/mcq-builder/new" element={<MCQBuilder />}></Route>
             <Route path="/dashboard" element={<Dashboard />}></Route>
           </Route>
 
@@ -29,6 +31,8 @@ export default function App() {
             )
           })}
           <Route path="/signup" element={<SignUpPage />}></Route>
+
+          <Route path="/error" element={<ErrorPage />}></Route>
         </Routes>
       </Router>
     </>

@@ -10,8 +10,13 @@ import { MCQUrlModal } from "../../components/MCQUrlModal"
 import { BuilderOptions } from "../../components/BuilderOptions"
 import { actions } from "./constants"
 import { BuilderNameDesc } from "../../components/BuilderNameDesc"
+import { useAuthContext } from "../../UserContext/useAuthContext"
+import { useNavigate, useParams } from "react-router-dom"
 
 export const MCQBuilder = () => {
+  const { mceid } = useParams()
+  const navigate = useNavigate()
+  const { auth } = useAuthContext()
   // mcqlist object is the state that represents all the mcqs, question and answers
   const [mcqList, dispatch] = useReducer(reducer, [newMCQ()])
   const [information, setInformation] = useState({
@@ -25,22 +30,28 @@ export const MCQBuilder = () => {
   useEffect(() => {
     setUpdated(false)
   }, [mcqList, information])
+  console.log(information)
 
   const sendCreateMCE = () => {
-    Axios.post(import.meta.env.VITE_SERVER_URL + "/mce", {
-      information: information,
-      mcqArray: mcqList,
-    }).then((response) => {
-      console.log(response)
-      setMce_id(response.data._id)
-      setShowModal(true)
-      setUpdated(true)
-    })
+    if (!mceid) {
+      Axios.post(import.meta.env.VITE_SERVER_URL + "/mce", {
+        ownerID: auth.user._id,
+        information: information,
+        mcqArray: mcqList,
+        mcqSubmissions: [],
+      }).then((response) => {
+        console.log(response)
+        setMce_id(response.data._id)
+        setShowModal(true)
+        setUpdated(true)
+      })
+    }
   }
 
   const sendUpdateMCE = () => {
     Axios.put(import.meta.env.VITE_SERVER_URL + "/mce", {
       id: mce_id,
+      ownerID: auth.user._id,
       information: information,
       mcqArray: mcqList,
     }).then((response) => {
@@ -48,6 +59,40 @@ export const MCQBuilder = () => {
       console.log(response.data)
     })
   }
+
+  useEffect(() => {
+    if (mceid) {
+      Axios.get(import.meta.env.VITE_SERVER_URL + "/mce/" + mceid)
+        .then((response) => {
+          console.log(mceid)
+          let data = response.data
+          console.log(data)
+          // setLoading((prev) => {
+          //   return { ...prev, isLoading: false }
+          // })
+          if (data) {
+            dispatch({
+              type: actions.SETINITIAL,
+              payload: {
+                mcqList: data.mcqArray,
+              },
+            })
+            setInformation(data.information)
+            setMce_id(mceid)
+            // setUpdated(true)
+          } else {
+            navigate("/error")
+            console.log("mcq builder does not exist" + data)
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+          // setLoading((prev) => {
+          //   return { ...prev, isLoading: false, error: true }
+          // })
+        })
+    }
+  }, [])
 
   return (
     <MCQBuilderContext.Provider value={mcqList}>
