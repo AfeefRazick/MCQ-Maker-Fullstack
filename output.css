@@ -1056,6 +1056,11 @@ img,
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-red-600{
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 38 38 / var(--tw-bg-opacity));
+}
+
 .p-1{
   padding: 0.25rem;
 }

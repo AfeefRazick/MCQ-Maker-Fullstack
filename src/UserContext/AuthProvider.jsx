@@ -9,8 +9,17 @@ const reducer = (auth, action) => {
   switch (action.type) {
     case authActionTypes.AUTO_LOGIN_LOADING:
       return { ...auth, isLoading: true, isAppLoaded: false }
+
+    case authActionTypes.AUTO_LOGIN_FAIL:
+      return {
+        ...auth,
+        isLoading: false,
+        isAuthenticated: false,
+        isAppLoaded: true,
+      }
+
     case authActionTypes.LOGIN_WITH_OAUTH_SUCCESS:
-      // setstoragejwttoken
+      localStorage.setItem("JWTTOKEN", action.payload.credential)
       return {
         ...auth,
         isLoading: false,
@@ -18,13 +27,20 @@ const reducer = (auth, action) => {
         isAuthenticated: true,
         user: { ...action.payload },
       }
+
+    case authActionTypes.LOGOUT_SUCCESS:
+      localStorage.removeItem("JWTTOKEN")
+      return { ...auth, isAuthenticated: false, user: {} }
+
     case authActionTypes.DELETE_USER_SUCCESS:
+      localStorage.removeItem("JWTTOKEN")
       return {
         ...auth,
         isLoading: false,
         isAuthenticated: false,
         user: {},
       }
+
     default: {
       throw new Error(`Unhandled action type: ${action.type}`)
     }
@@ -34,12 +50,12 @@ const reducer = (auth, action) => {
 export const AuthProvider = ({ children }) => {
   const [auth, dispatch] = useReducer(reducer, {
     isAuthenticated: false,
-    isLoading: false,
+    isLoading: true,
     user: {},
-    isAppLoaded: true,
+    isAppLoaded: false,
   })
 
-  const handleCallbackResponse = async (response) => {
+  const loginOrSignupWithJWT = async (response) => {
     const jwt = response.credential
 
     let userFromDB = {
@@ -58,29 +74,57 @@ export const AuthProvider = ({ children }) => {
       type: authActionTypes.LOGIN_WITH_OAUTH_SUCCESS,
       payload: { credential: jwt, ...userFromDB },
     })
+    return userFromDB
   }
+  // let [userFromDB, setUserFromDB] = useState(null)
 
   useEffect(() => {
-    if (window.google) {
-      window.google.accounts.id.initialize({
-        client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
-        callback: handleCallbackResponse,
-        // auto_select: true,
-      })
-      window.google.accounts.id.prompt()
-      if (window.location.pathname === "/signup") {
-        window.google.accounts.id.renderButton(
-          document.getElementById("buttonDiv"),
-          {}
-        )
+    const asyncWrapper = async () => {
+      //set initial loading while authenticating
+      const jwt = localStorage.getItem("JWTTOKEN")
+      if (jwt) {
+        dispatch({ type: authActionTypes.AUTO_LOGIN_LOADING })
+        await loginOrSignupWithJWT({ credential: jwt })
+      } else {
+        // console.log(auth)
+        // setUserFromDB(null)
+        dispatch({ type: authActionTypes.AUTO_LOGIN_FAIL })
+      }
+      console.log(auth)
+    }
+    asyncWrapper()
+  }, [])
+
+  useEffect(() => {
+    if (auth.isAppLoaded) {
+      // google oauth setup
+      if (window.google) {
+        window.google.accounts.id.initialize({
+          client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+          callback: loginOrSignupWithJWT,
+          // auto_select: true,
+        })
+
+        if (!auth.isAuthenticated) {
+          window.google.accounts.id.prompt()
+        }
+
+        // if (window.location.pathname === "/signup") {
+        //   window.google.accounts.id.renderButton(
+        //     document.getElementById("buttonDiv"),
+        //     { size: "large" }
+        //   )
+        // }
       }
     }
-  }, [])
+  }, [auth.isAuthenticated, auth.isAppLoaded])
+
+  console.log(auth)
 
   if (!auth.isAppLoaded) {
     return <Loading />
   }
-  console.log(auth)
+
   return (
     <authContext.Provider value={{ auth, dispatch }}>
       {children}

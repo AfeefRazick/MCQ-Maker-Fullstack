@@ -1,3 +1,3 @@
 export const Loading = () => {
-  return <div>Loading</div>
+  return <div className="h-full w-full bg-red-600">Loading</div>
 }

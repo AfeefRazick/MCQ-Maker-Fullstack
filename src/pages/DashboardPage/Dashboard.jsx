@@ -1,6 +1,10 @@
 import axios from "axios"
 import { useAuthContext } from "../../UserContext/useAuthContext"
-import { DELETE_USER_SUCCESS } from "../../UserContext/authActionTypes"
+import {
+  DELETE_USER_SUCCESS,
+  LOGOUT_SUCCESS,
+} from "../../UserContext/authActionTypes"
+import { Link } from "react-router-dom"
 
 export const Dashboard = () => {
   const { auth, dispatch } = useAuthContext()
@@ -12,9 +16,18 @@ export const Dashboard = () => {
       dispatch({ type: DELETE_USER_SUCCESS })
     }
   }
+  const logout = () => {
+    dispatch({ type: LOGOUT_SUCCESS })
+  }
   return (
     <div>
-      <button onClick={deleteAccount}>Delete Account</button>
+      <Link className="bg-green-400" to={"/mcq-builder"}>
+        Create MCQ
+      </Link>
+      <button onClick={logout}>Log Out</button>
+      <button className="bg-red-600" onClick={deleteAccount}>
+        Delete Account
+      </button>
     </div>
   )
 }
