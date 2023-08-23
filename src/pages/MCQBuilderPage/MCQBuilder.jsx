@@ -30,7 +30,6 @@ export const MCQBuilder = () => {
   useEffect(() => {
     setUpdated(false)
   }, [mcqList, information])
-  console.log(information)
 
   const sendCreateMCE = () => {
     if (!mceid) {
@@ -61,38 +60,58 @@ export const MCQBuilder = () => {
   }
 
   useEffect(() => {
+    // if (mceid) {
+    //   Axios.get(import.meta.env.VITE_SERVER_URL + "/user/"+auth.user.credential)
+    //     .then((response) => {
+
+    //       let data = response.data
+    //       console.log(data)
+    //       // setLoading((prev) => {
+    //       //   return { ...prev, isLoading: false }
+    //       // })
+    //       if (data) {
+    //         dispatch({
+    //           type: actions.SETINITIAL,
+    //           payload: {
+    //             mcqList: data.mcqArray,
+    //           },
+    //         })
+    //         setInformation(data.information)
+    //         setMce_id(mceid)
+    //         // setUpdated(true)
+    //       } else {
+    //         navigate("/error")
+    //         console.log("mcq builder does not exist" + data)
+    //       }
+    //     })
+    //     .catch((err) => {
+    //       console.log(err)
+    //       // setLoading((prev) => {
+    //       //   return { ...prev, isLoading: false, error: true }
+    //       // })
+    //     })
+    // }
     if (mceid) {
-      Axios.get(import.meta.env.VITE_SERVER_URL + "/mce/" + mceid)
-        .then((response) => {
-          console.log(mceid)
-          let data = response.data
-          console.log(data)
-          // setLoading((prev) => {
-          //   return { ...prev, isLoading: false }
-          // })
-          if (data) {
-            dispatch({
-              type: actions.SETINITIAL,
-              payload: {
-                mcqList: data.mcqArray,
-              },
-            })
-            setInformation(data.information)
-            setMce_id(mceid)
-            // setUpdated(true)
-          } else {
-            navigate("/error")
-            console.log("mcq builder does not exist" + data)
-          }
+      let mce = auth.user.multipleChoiceExams.find((mce) => {
+        if (mce._id === mceid) return mce
+      })
+
+      if (mce) {
+        dispatch({
+          type: actions.SETINITIAL,
+          payload: {
+            mcqList: mce.mcqArray,
+          },
         })
-        .catch((err) => {
-          console.log(err)
-          // setLoading((prev) => {
-          //   return { ...prev, isLoading: false, error: true }
-          // })
-        })
+        setInformation(mce.information)
+        setMce_id(mceid)
+        // setUpdated(true)
+      } else {
+        navigate("/error")
+        console.log("mcq builder does not exist")
+      }
     }
-  }, [mceid, navigate])
+  }, [mceid, navigate, auth.user.multipleChoiceExams])
 
   return (
     <MCQBuilderContext.Provider value={mcqList}>

@@ -18,7 +18,7 @@ export default function Hero() {
         <Button
           className="mx-3 my-5"
           buttonStyle="btn-outline"
-          linkpath="/mcq-builder"
+          linkpath="/mcq-builder/new"
         >
           Start designing for free
           <TbEdit className="relative ml-1 text-xl" />
