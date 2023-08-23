@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useReducer } from "react"
+import { useCallback, useEffect, useReducer } from "react"
 import { authContext } from "./authContext"
 import { Loading } from "../pages/Loading"
 import * as authActionTypes from "./authActionTypes"
@@ -55,27 +55,33 @@ export const AuthProvider = ({ children }) => {
     isAppLoaded: false,
   })
 
-  const loginOrSignupWithJWT = async (response) => {
-    const jwt = response.credential
+  const loginOrSignupWithJWT = useCallback(
+    async (response) => {
+      const jwt = response.credential
 
-    let userFromDB = {
-      ...(await axios.get(import.meta.env.VITE_SERVER_URL + "/user/" + jwt)),
-    }.data
-
-    if (!userFromDB) {
-      userFromDB = {
-        ...(await axios.post(import.meta.env.VITE_SERVER_URL + "/user/create", {
-          credential: jwt,
-        })),
+      let userFromDB = {
+        ...(await axios.get(import.meta.env.VITE_SERVER_URL + "/user/" + jwt)),
       }.data
-    }
 
-    dispatch({
-      type: authActionTypes.LOGIN_WITH_OAUTH_SUCCESS,
-      payload: { credential: jwt, ...userFromDB },
-    })
-    return userFromDB
-  }
+      if (!userFromDB) {
+        userFromDB = {
+          ...(await axios.post(
+            import.meta.env.VITE_SERVER_URL + "/user/create",
+            {
+              credential: jwt,
+            }
+          )),
+        }.data
+      }
+
+      dispatch({
+        type: authActionTypes.LOGIN_WITH_OAUTH_SUCCESS,
+        payload: { credential: jwt, ...userFromDB },
+      })
+      return userFromDB
+    },
+    [dispatch]
+  )
   // let [userFromDB, setUserFromDB] = useState(null)
 
   useEffect(() => {
@@ -90,10 +96,9 @@ export const AuthProvider = ({ children }) => {
         // setUserFromDB(null)
         dispatch({ type: authActionTypes.AUTO_LOGIN_FAIL })
       }
-      console.log(auth)
     }
     asyncWrapper()
-  }, [])
+  }, [loginOrSignupWithJWT])
 
   useEffect(() => {
     if (auth.isAppLoaded) {
@@ -117,7 +122,7 @@ export const AuthProvider = ({ children }) => {
         // }
       }
     }
-  }, [auth.isAuthenticated, auth.isAppLoaded])
+  }, [auth.isAuthenticated, auth.isAppLoaded, loginOrSignupWithJWT])
 
   console.log(auth)
 

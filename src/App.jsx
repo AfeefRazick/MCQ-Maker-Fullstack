@@ -15,7 +15,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route element={<PrivateRoutes />}>
-            <Route path="/:mceid" element={<MCEPage />}></Route>
+            <Route path="mcq/:mceid" element={<MCEPage />}></Route>
             <Route path="/mcq-builder/:mceid" element={<MCQBuilder />}></Route>
             <Route path="/mcq-builder/new" element={<MCQBuilder />}></Route>
             <Route path="/dashboard" element={<Dashboard />}></Route>

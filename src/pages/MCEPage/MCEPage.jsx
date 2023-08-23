@@ -40,7 +40,7 @@ export const MCEPage = () => {
           return { ...prev, isLoading: false, error: true }
         })
       })
-  }, [])
+  }, [mceid])
 
   if (loading.isLoading) return <Loading />
   else if (loading.error) return <ErrorPage />

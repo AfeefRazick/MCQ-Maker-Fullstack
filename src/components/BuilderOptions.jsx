@@ -36,7 +36,7 @@ export const BuilderOptions = ({
           {mceCreated && (
             <a
               target="blank"
-              href={import.meta.env.VITE_CLIENT_URL + mce_id}
+              href={import.meta.env.VITE_CLIENT_URL + "mcq/" + mce_id}
               className="mx-2 flex items-center"
             >
               <AiOutlineEye className="rounded-full p-1 text-4xl hover:bg-slate-200" />

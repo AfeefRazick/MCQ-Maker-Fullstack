@@ -92,7 +92,7 @@ export const MCQBuilder = () => {
           // })
         })
     }
-  }, [])
+  }, [mceid, navigate])
 
   return (
     <MCQBuilderContext.Provider value={mcqList}>
@@ -113,7 +113,7 @@ export const MCQBuilder = () => {
           {mce_id !== "" && (
             <div className="flex w-full justify-center rounded-b-lg bg-black px-2">
               <p className="no-scrollbar select-all overflow-x-scroll whitespace-nowrap  py-1 text-center text-main underline">
-                {import.meta.env.VITE_CLIENT_URL + mce_id}
+                {import.meta.env.VITE_CLIENT_URL + "mcq/" + mce_id}
               </p>
             </div>
           )}

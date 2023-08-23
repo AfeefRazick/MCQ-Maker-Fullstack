@@ -1,32 +1,39 @@
 import axios from "axios"
-import { useEffect } from "react"
+import { useCallback, useEffect } from "react"
 import { LOGIN_WITH_OAUTH_SUCCESS } from "../../UserContext/authActionTypes"
 import { useAuthContext } from "../../UserContext/useAuthContext"
 
 export const SignUpBox = () => {
   const { auth, dispatch } = useAuthContext()
 
-  const loginOrSignupWithJWT = async (response) => {
-    const jwt = response.credential
+  const loginOrSignupWithJWT = useCallback(
+    async (response) => {
+      const jwt = response.credential
 
-    let userFromDB = {
-      ...(await axios.get(import.meta.env.VITE_SERVER_URL + "/user/" + jwt)),
-    }.data
-
-    if (!userFromDB) {
-      userFromDB = {
-        ...(await axios.post(import.meta.env.VITE_SERVER_URL + "/user/create", {
-          credential: jwt,
-        })),
+      let userFromDB = {
+        ...(await axios.get(import.meta.env.VITE_SERVER_URL + "/user/" + jwt)),
       }.data
-    }
 
-    dispatch({
-      type: LOGIN_WITH_OAUTH_SUCCESS,
-      payload: { credential: jwt, ...userFromDB },
-    })
-    return userFromDB
-  }
+      if (!userFromDB) {
+        userFromDB = {
+          ...(await axios.post(
+            import.meta.env.VITE_SERVER_URL + "/user/create",
+            {
+              credential: jwt,
+            }
+          )),
+        }.data
+      }
+
+      dispatch({
+        type: LOGIN_WITH_OAUTH_SUCCESS,
+        payload: { credential: jwt, ...userFromDB },
+      })
+      return userFromDB
+    },
+    [dispatch]
+  )
+
   useEffect(() => {
     if (auth.isAppLoaded) {
       // google oauth setup
@@ -52,7 +59,7 @@ export const SignUpBox = () => {
         // }
       }
     }
-  }, [auth.isAuthenticated, auth.isAppLoaded])
+  }, [auth.isAuthenticated, auth.isAppLoaded, loginOrSignupWithJWT])
 
   const handleSignUp = () => {}
 
