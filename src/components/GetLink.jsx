@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 
 export const GetLink = ({ link }) => {
   return (
-    <Link className="flex items-center" to={link}>
+    <Link title="Get Link" className="flex items-center" to={link}>
       <BsLink45Deg className="icon-lg " />
     </Link>
   )

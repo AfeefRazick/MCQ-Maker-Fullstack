@@ -77,7 +77,11 @@ export const AnswerBuilder = ({
       ></input>
 
       {mcqList[questionIndex].answers.length !== 1 && (
-        <FaTimes onClick={deleteAnswer} className="icon bg-transparent" />
+        <FaTimes
+          title="Delete Answer"
+          onClick={deleteAnswer}
+          className="icon bg-transparent"
+        />
       )}
     </div>
   )

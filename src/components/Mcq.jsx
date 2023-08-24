@@ -81,16 +81,22 @@ export const Mcq = ({ index, mcqid, mcqObject }) => {
           )
         })}
 
-        <BiMessageSquareAdd onClick={addAnswer} className="icon plus-ans" />
+        <BiMessageSquareAdd
+          title="Add Answer"
+          onClick={addAnswer}
+          className="icon plus-ans"
+        />
         <div className="mx-auto mt-2 grid w-11/12 grid-rows-[0fr] justify-end  border-solid border-slate-300 pt-1 transition-all  group-focus-within/mcq:grid-rows-[1fr] group-focus-within/mcq:border-t ">
           <div className="overflow-hidden">
             {mcqList.length > 1 && (
               <AiOutlineDelete
+                title="Delete Question"
                 onClick={deleteQuestion}
                 className="icon bg-transparent"
               />
             )}
             <BiDuplicate
+              title="Duplicate Question"
               onClick={duplicateQuestion}
               className="icon bg-transparent"
             />
@@ -99,8 +105,12 @@ export const Mcq = ({ index, mcqid, mcqObject }) => {
       </div>
 
       <div className="mr absolute right-0 top-0 mt-4 w-8">
-        <AiOutlinePlus onClick={addQuestion} className="icon plus" />
-        <BiImageAdd className="icon addimage" />
+        <AiOutlinePlus
+          title="Add Question"
+          onClick={addQuestion}
+          className="icon plus"
+        />
+        <BiImageAdd title="Add Image" className="icon addimage" />
       </div>
     </div>
   )
