@@ -72,7 +72,7 @@ export const DashTopSide = () => {
       </nav>
 
       <div
-        className={`fixed top-0 z-20 flex h-screen w-72 flex-col overflow-hidden bg-white py-2 shadow-lg transition-[left] duration-500 ease-in-out md:left-0 md:top-20 ${
+        className={`fixed top-0 z-20 flex h-screen w-72 flex-col overflow-hidden bg-white px-3 py-2 shadow-lg transition-[left] duration-500 ease-in-out md:left-0 md:top-20 ${
           show ? "left-0" : "left-[-100%]"
         }`}
       >
@@ -80,11 +80,19 @@ export const DashTopSide = () => {
           <MenuIcon click={handleClick} />
         </div>
         <ul className="p-3"></ul>
-        <Link className="bg-green-400" to={"/mcq-builder"}>
+        <Link className="bg-green-400" to={"/mcq-builder/new"}>
           Create MCQ
         </Link>
-        <button onClick={logout}>Log Out</button>
-        <button className="bg-red-600" onClick={deleteAccount}>
+        <button
+          className="mt-2 rounded-md bg-black py-1 text-white hover:bg-slate-900"
+          onClick={logout}
+        >
+          Log Out
+        </button>
+        <button
+          className="mt-2 rounded-md bg-red-600 py-1"
+          onClick={deleteAccount}
+        >
           Delete Account
         </button>
       </div>

@@ -42,6 +42,9 @@
   .icon-lg {
     @apply h-10 w-10 cursor-pointer rounded-full p-1 text-3xl hover:bg-slate-200 active:bg-slate-400;
   }
+  .icon-highlight {
+    @apply hover:bg-transparent hover:fill-cyan-500 hover:text-cyan-500;
+  }
   .btn {
     @apply flex cursor-pointer items-center border-none px-5 py-2 font-rubik text-base outline-none hover:transition-all hover:duration-500 hover:ease-in-out;
   }

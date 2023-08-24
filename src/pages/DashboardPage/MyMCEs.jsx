@@ -2,6 +2,7 @@ import { useAuthContext } from "../../UserContext/useAuthContext"
 import { v4 as uuidv4 } from "uuid"
 import { DeleteMCE } from "../../components/DeleteMCE"
 import { GetLink } from "../../components/GetLink"
+import { Link } from "react-router-dom"
 
 export const MyMCEs = () => {
   const { auth } = useAuthContext()
@@ -10,9 +11,12 @@ export const MyMCEs = () => {
     <ul className="h-full min-h-screen w-full py-2">
       {auth?.user?.multipleChoiceExams?.map((mce) => {
         return (
-          <li key={uuidv4()} className="py-2">
+          <li key={uuidv4()} className=" py-2">
             <div className="flex h-16 w-full items-center justify-between overflow-hidden rounded-xl bg-white px-2 md:h-[72px]  ">
-              <div className="flex w-5/6">
+              <Link
+                to={import.meta.env.VITE_CLIENT_URL + "mcq-builder/" + mce._id}
+                className="flex w-5/6"
+              >
                 <img
                   src="/checkboxes.svg"
                   className=" h-10 w-10 md:h-12 md:w-12"
@@ -35,9 +39,11 @@ export const MyMCEs = () => {
                     Last modified {mce.lastModified}
                   </p>
                 </div>
-              </div>
+              </Link>
               <div className="flex">
-                <GetLink />
+                <GetLink
+                  link={import.meta.env.VITE_CLIENT_URL + "mcq/" + mce._id}
+                />
 
                 <DeleteMCE />
               </div>
