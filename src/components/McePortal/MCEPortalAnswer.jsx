@@ -1,11 +1,9 @@
 /* eslint-disable react/prop-types */
-import { useContext } from "react"
 
 export const MCEPortalAnswer = ({
   mcqid,
   answerid,
-  questionIndex,
-  index,
+
   text,
   selected,
   // correct,

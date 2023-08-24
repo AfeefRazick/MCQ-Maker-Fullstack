@@ -1,37 +1,15 @@
-import { Link } from "react-router-dom"
-import { MyForms } from "./MyForms"
-import axios from "axios"
-import { useAuthContext } from "../../UserContext/useAuthContext"
-import {
-  DELETE_USER_SUCCESS,
-  LOGOUT_SUCCESS,
-} from "../../UserContext/authActionTypes"
+import { MyMCEs } from "./MyMCEs"
 
 export const DashContent = () => {
-  const { auth, dispatch } = useAuthContext()
-  const deleteAccount = async () => {
-    const deleteResponse = await axios.delete(
-      import.meta.env.VITE_SERVER_URL + "/user/delete/" + auth.user.credential
-    )
-    if (deleteResponse.data.deletedCount === 1) {
-      dispatch({ type: DELETE_USER_SUCCESS })
-    }
-  }
-  const logout = () => {
-    dispatch({ type: LOGOUT_SUCCESS })
-  }
-
   return (
-    <div className="mt-16 h-full w-full md:mt-20 md:pl-72">
-      <div className="w-full px-[4%]">
-        <MyForms />
-        <Link className="bg-green-400" to={"/mcq-builder"}>
-          Create MCQ
-        </Link>
-        <button onClick={logout}>Log Out</button>
-        <button className="bg-red-600" onClick={deleteAccount}>
-          Delete Account
-        </button>
+    <div className="h-full w-full pt-16 md:pl-72 md:pt-20">
+      <div className="h-full w-full bg-slate-100 px-[4%]">
+        <div>
+          <h2 className="font-quicksand pt-2 text-[clamp(26px,5vw,36px)]">
+            My MCQ&#39;s
+          </h2>
+        </div>
+        <MyMCEs />
       </div>
     </div>
   )

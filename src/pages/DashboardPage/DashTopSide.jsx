@@ -4,7 +4,13 @@ import { useState } from "react"
 import { CgMenu } from "react-icons/cg"
 import Button from "../../components/Button"
 import mainlinks from "../../components/Linknames"
-// import { v4 as uuidv4 } from "uuid"
+import axios from "axios"
+import { useAuthContext } from "../../UserContext/useAuthContext"
+import {
+  DELETE_USER_SUCCESS,
+  LOGOUT_SUCCESS,
+} from "../../UserContext/authActionTypes"
+import { Link } from "react-router-dom"
 
 function MenuIcon({ click }) {
   return (
@@ -18,8 +24,19 @@ function MenuIcon({ click }) {
 }
 
 export const DashTopSide = () => {
-  const [show, setShow] = useState(true)
-
+  const [show, setShow] = useState(false)
+  const { auth, dispatch } = useAuthContext()
+  const deleteAccount = async () => {
+    const deleteResponse = await axios.delete(
+      import.meta.env.VITE_SERVER_URL + "/user/delete/" + auth.user.credential
+    )
+    if (deleteResponse.data.deletedCount === 1) {
+      dispatch({ type: DELETE_USER_SUCCESS })
+    }
+  }
+  const logout = () => {
+    dispatch({ type: LOGOUT_SUCCESS })
+  }
   const handleClick = () => {
     setShow(!show)
   }
@@ -63,6 +80,13 @@ export const DashTopSide = () => {
           <MenuIcon click={handleClick} />
         </div>
         <ul className="p-3"></ul>
+        <Link className="bg-green-400" to={"/mcq-builder"}>
+          Create MCQ
+        </Link>
+        <button onClick={logout}>Log Out</button>
+        <button className="bg-red-600" onClick={deleteAccount}>
+          Delete Account
+        </button>
       </div>
     </>
   )

@@ -3,7 +3,7 @@ import { DashContent } from "./DashContent"
 
 export const DashboardPage = () => {
   return (
-    <div className="w-full">
+    <div className=" min-h-screen w-full">
       <DashTopSide />
       <DashContent />
     </div>
