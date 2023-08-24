@@ -4,7 +4,7 @@ import mainlinks from "./components/Linknames"
 import { MCQBuilder } from "./pages/MCQBuilderPage/MCQBuilder"
 import { MCEPage } from "./pages/MCEPage/MCEPage"
 import { SignUpPage } from "./pages/SignUpSignInPage/SignUpPage"
-import { Dashboard } from "./pages/DashboardPage/Dashboard"
+import { DashboardPage } from "./pages/DashboardPage/DashboardPage"
 import { PrivateRoutes } from "./components/PrivateRoutes"
 import { ErrorPage } from "./pages/ErrorPage"
 
@@ -18,7 +18,7 @@ export default function App() {
             <Route path="mcq/:mceid" element={<MCEPage />}></Route>
             <Route path="/mcq-builder/:mceid" element={<MCQBuilder />}></Route>
             <Route path="/mcq-builder/new" element={<MCQBuilder />}></Route>
-            <Route path="/dashboard" element={<Dashboard />}></Route>
+            <Route path="/dashboard" element={<DashboardPage />}></Route>
           </Route>
 
           {mainlinks.map((link) => {

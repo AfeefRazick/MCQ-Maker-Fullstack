@@ -25,7 +25,7 @@ export const MCQBuilder = () => {
   })
   const [mce_id, setMce_id] = useState("")
   const [showModal, setShowModal] = useState(false)
-  const [updated, setUpdated] = useState(false)
+  const [updated, setUpdated] = useState(true)
 
   useEffect(() => {
     setUpdated(false)

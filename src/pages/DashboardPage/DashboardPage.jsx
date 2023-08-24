@@ -5,8 +5,10 @@ import {
   LOGOUT_SUCCESS,
 } from "../../UserContext/authActionTypes"
 import { Link } from "react-router-dom"
+import { DashTopSide } from "./DashTopSide"
+import { MyForms } from "./MyForms"
 
-export const Dashboard = () => {
+export const DashboardPage = () => {
   const { auth, dispatch } = useAuthContext()
   const deleteAccount = async () => {
     const deleteResponse = await axios.delete(
@@ -20,14 +22,18 @@ export const Dashboard = () => {
     dispatch({ type: LOGOUT_SUCCESS })
   }
   return (
-    <div>
-      <Link className="bg-green-400" to={"/mcq-builder"}>
-        Create MCQ
-      </Link>
-      <button onClick={logout}>Log Out</button>
-      <button className="bg-red-600" onClick={deleteAccount}>
-        Delete Account
-      </button>
-    </div>
+    <>
+      <DashTopSide />
+      <div className="mt-16 h-full w-full md:mt-20">
+        <MyForms />
+        <Link className="bg-green-400" to={"/mcq-builder"}>
+          Create MCQ
+        </Link>
+        <button onClick={logout}>Log Out</button>
+        <button className="bg-red-600" onClick={deleteAccount}>
+          Delete Account
+        </button>
+      </div>
+    </>
   )
 }

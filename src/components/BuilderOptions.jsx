@@ -3,8 +3,7 @@ import { useEffect, useState } from "react"
 import Button from "./Button"
 import { AiOutlineCloudUpload, AiOutlineEye } from "react-icons/ai"
 import { IoLinkOutline } from "react-icons/io5"
-import { Link } from "react-router-dom"
-import { CgCarousel } from "react-icons/cg"
+import { ResponsiveLogo } from "./ResponsiveLogo"
 
 export const BuilderOptions = ({
   sendCreateMCE,
@@ -20,17 +19,7 @@ export const BuilderOptions = ({
   return (
     <div className="fixed top-0 z-10 flex h-16 w-full justify-center border-b border-solid border-slate-200 bg-white md:h-20">
       <div className="flex h-full w-full items-center justify-between px-2 sm:w-11/12">
-        <div className="flex items-center">
-          <Link
-            to="/"
-            className="mx-1 cursor-pointer font-nunito text-3xl text-cyan-500 "
-          >
-            <CgCarousel className="relative top-1 mx-1 w-10 rounded-lg bg-black text-white" />
-            <span className="hidden sm:inline">
-              <span className="text-black">MCQ</span> Maker
-            </span>
-          </Link>
-        </div>
+        <ResponsiveLogo />
 
         <div className="flex">
           {mceCreated && (
