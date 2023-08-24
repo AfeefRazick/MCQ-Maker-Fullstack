@@ -816,12 +816,12 @@ img,
   height: 4rem;
 }
 
-.h-3\/5{
-  height: 60%;
+.h-20{
+  height: 5rem;
 }
 
-.h-40{
-  height: 10rem;
+.h-3\/5{
+  height: 60%;
 }
 
 .h-\[calc\(100vh-80px\)\]{
@@ -840,12 +840,12 @@ img,
   height: 100vh;
 }
 
-.h-60{
-  height: 15rem;
+.h-80{
+  height: 20rem;
 }
 
-.h-20{
-  height: 5rem;
+.h-60{
+  height: 15rem;
 }
 
 .w-10{
@@ -862,10 +862,6 @@ img,
 
 .w-4\/5{
   width: 80%;
-}
-
-.w-40{
-  width: 10rem;
 }
 
 .w-72{
@@ -896,6 +892,10 @@ img,
   width: 100%;
 }
 
+.w-80{
+  width: 20rem;
+}
+
 .w-60{
   width: 15rem;
 }
@@ -906,6 +906,10 @@ img,
 
 .max-w-lg{
   max-width: 32rem;
+}
+
+.transform{
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .cursor-pointer{
@@ -1126,6 +1130,11 @@ img,
   padding-right: 4%;
 }
 
+.px-\[5\%\]{
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
 .py-0{
   padding-top: 0px;
   padding-bottom: 0px;
@@ -1149,16 +1158,6 @@ img,
 .py-5{
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
-}
-
-.px-\[5\%\]{
-  padding-left: 5%;
-  padding-right: 5%;
-}
-
-.py-10{
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
 }
 
 .pb-2{
@@ -1321,6 +1320,12 @@ img,
           backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
 }
 
+.transition-\[left\]{
+  transition-property: left;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
 .transition-all{
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1443,10 +1448,6 @@ input[type="radio"].green:checked {
 }
 
 @media (min-width: 600px){
-  .sm\:top-20{
-    top: 5rem;
-  }
-
   .sm\:mx-3{
     margin-left: 0.75rem;
     margin-right: 0.75rem;
@@ -1502,12 +1503,12 @@ input[type="radio"].green:checked {
 }
 
 @media (min-width: 900px){
-  .md\:top-20{
-    top: 5rem;
-  }
-
   .md\:left-0{
     left: 0px;
+  }
+
+  .md\:top-20{
+    top: 5rem;
   }
 
   .md\:mt-16{
@@ -1530,16 +1531,16 @@ input[type="radio"].green:checked {
     height: 5rem;
   }
 
+  .md\:w-11\/12{
+    width: 91.666667%;
+  }
+
   .md\:w-\[42vw\]{
     width: 42vw;
   }
 
   .md\:w-auto{
     width: auto;
-  }
-
-  .md\:w-11\/12{
-    width: 91.666667%;
   }
 
   @keyframes typing{
@@ -1616,6 +1617,10 @@ input[type="radio"].green:checked {
   .md\:py-3{
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
+  }
+
+  .md\:pl-72{
+    padding-left: 18rem;
   }
 
   .md\:text-lg{

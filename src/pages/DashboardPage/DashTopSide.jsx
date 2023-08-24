@@ -1,20 +1,10 @@
-import { MiniLogo } from "../../components/MiniLogo"
-
-// export const DashTop = () => {
-//   return (
-//     <div className="fixed top-0 z-10 flex h-16 w-full items-center justify-center border-b border-solid border-slate-200 backdrop-blur-md md:h-20 md:justify-center">
-//       <nav className="flex h-full w-full items-center justify-between px-2 sm:w-11/12">
-//       </nav>
-//     </div>
-//   )
-// }
 /* eslint-disable react/prop-types */
-
+import { MiniLogo } from "../../components/MiniLogo"
 import { useState } from "react"
 import { CgMenu } from "react-icons/cg"
 import Button from "../../components/Button"
 import mainlinks from "../../components/Linknames"
-import { v4 as uuidv4 } from "uuid"
+// import { v4 as uuidv4 } from "uuid"
 
 function MenuIcon({ click }) {
   return (
@@ -34,9 +24,9 @@ export const DashTopSide = () => {
     setShow(!show)
   }
 
-  const closeSidebar = () => {
-    setShow(false)
-  }
+  // const closeSidebar = () => {
+  //   setShow(false)
+  // }
 
   return (
     <>
@@ -65,21 +55,14 @@ export const DashTopSide = () => {
       </nav>
 
       <div
-        className={`fixed top-0 z-20 flex h-screen w-72 flex-col overflow-hidden bg-white py-2 shadow-boxshadow transition-all duration-500 ease-in-out md:left-0 md:top-20 ${
+        className={`fixed top-0 z-20 flex h-screen w-72 flex-col overflow-hidden bg-white py-2 shadow-lg transition-[left] duration-500 ease-in-out md:left-0 md:top-20 ${
           show ? "left-0" : "left-[-100%]"
         }`}
       >
         <div className="flex items-center md:hidden">
           <MenuIcon click={handleClick} />
         </div>
-        <ul className="p-3">
-          {mainlinks.map((slink) => {
-            return (
-              // <SidebarRow key={slink.id} link={slink} func={closeSidebar} />
-              <div key={uuidv4()}>rgdgdfdgdfgf</div>
-            )
-          })}
-        </ul>
+        <ul className="p-3"></ul>
       </div>
     </>
   )
