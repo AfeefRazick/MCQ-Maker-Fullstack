@@ -1,4 +1,5 @@
 import designurl from "/design-page.png"
+
 export default function Information() {
   return (
     <div className=" flex w-full flex-wrap items-center justify-center sm:px-16 md:flex-nowrap md:justify-between">

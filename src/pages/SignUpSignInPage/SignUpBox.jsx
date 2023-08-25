@@ -2,11 +2,13 @@ import axios from "axios"
 import { useCallback, useEffect } from "react"
 import { LOGIN_WITH_OAUTH_SUCCESS } from "../../UserContext/authActionTypes"
 import { useAuthContext } from "../../UserContext/useAuthContext"
+import { useNavigate } from "react-router-dom"
 
 export const SignUpBox = () => {
+  const navigate = useNavigate()
   const { auth, dispatch } = useAuthContext()
 
-  const loginOrSignupWithJWT = useCallback(
+  const loginOrSignupWithGoogle = useCallback(
     async (response) => {
       const jwt = response.credential
 
@@ -29,9 +31,12 @@ export const SignUpBox = () => {
         type: LOGIN_WITH_OAUTH_SUCCESS,
         payload: { credential: jwt, ...userFromDB },
       })
+      setTimeout(() => {
+        navigate("/dashboard")
+      }, 100)
       return userFromDB
     },
-    [dispatch]
+    [dispatch, navigate]
   )
 
   useEffect(() => {
@@ -40,7 +45,7 @@ export const SignUpBox = () => {
       if (window.google) {
         window.google.accounts.id.initialize({
           client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
-          callback: loginOrSignupWithJWT,
+          callback: loginOrSignupWithGoogle,
           // auto_select: true,
         })
         // console.log(!auth.isAuthenticated && auth.isAppLoaded)
@@ -59,7 +64,7 @@ export const SignUpBox = () => {
         // }
       }
     }
-  }, [auth.isAuthenticated, auth.isAppLoaded, loginOrSignupWithJWT])
+  }, [auth.isAuthenticated, auth.isAppLoaded, loginOrSignupWithGoogle])
 
   const handleSignUp = () => {}
 

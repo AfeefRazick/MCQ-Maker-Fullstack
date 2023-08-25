@@ -1,11 +1,7 @@
 /* eslint-disable react/prop-types */
-
 import { useContext, useRef, useState } from "react"
-import {
-  // MCQBuilderContext,
-  MCQBuilderDispatchContext,
-} from "../pages/MCQBuilderPage/MCQbuilderContext"
-import { actions } from "../pages/MCQBuilderPage/constants"
+import { MCQBuilderDispatchContext } from "../MCQbuilderContext"
+import { actions } from "../constants"
 
 export const QuestionBuilder = ({ mcqid, questionIndex, text }) => {
   const quest = useRef("")

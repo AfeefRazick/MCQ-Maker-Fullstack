@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import { ReadNameDesc } from "../ReadNameDesc"
+import { ReadNameDesc } from "../../pages/MCEPage/ReadNameDesc"
 import { MCEPortalMCQ } from "./MCEPortalMCQ"
 
 export const MCEPortal = ({ information, mcqList }) => {

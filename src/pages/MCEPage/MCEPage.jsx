@@ -3,10 +3,10 @@ import { useParams } from "react-router-dom"
 import Axios from "axios"
 import { Loading } from "../../pages/Loading"
 import { actions } from "../MCQBuilderPage/constants"
-import { McqReadOnly } from "../../components/McqReadOnly"
-import { ReadNameDesc } from "../../components/ReadNameDesc"
 import { MCQReaderContext, MCQReaderDispatchContext } from "./MCQReaderContext"
 import { ErrorPage } from "../ErrorPage"
+import { ReadNameDesc } from "./components/ReadNameDesc"
+import { McqReadOnly } from "./components/McqReadOnly"
 
 export const MCEPage = () => {
   const { mceid } = useParams()

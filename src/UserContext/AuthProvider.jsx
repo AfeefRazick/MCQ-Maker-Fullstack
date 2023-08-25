@@ -27,6 +27,16 @@ const reducer = (auth, action) => {
         isAuthenticated: true,
         user: { ...action.payload },
       }
+    case authActionTypes.AUTO_LOGIN_SUCCESS:
+      localStorage.setItem("JWTTOKEN", action.payload.credential)
+
+      return {
+        ...auth,
+        isLoading: false,
+        isAppLoaded: true,
+        isAuthenticated: true,
+        user: { ...action.payload },
+      }
 
     case authActionTypes.LOGOUT_SUCCESS:
       localStorage.removeItem("JWTTOKEN")
@@ -55,7 +65,37 @@ export const AuthProvider = ({ children }) => {
     isAppLoaded: false,
   })
 
-  const loginOrSignupWithJWT = useCallback(
+  const loginWithJWT = useCallback(
+    async (response) => {
+      const jwt = response.credential
+
+      let userFromDB = {
+        ...(await axios.get(import.meta.env.VITE_SERVER_URL + "/user/" + jwt)),
+      }.data
+
+      if (!userFromDB) {
+        userFromDB = {
+          ...(await axios.post(
+            import.meta.env.VITE_SERVER_URL + "/user/create",
+            {
+              credential: jwt,
+            }
+          )),
+        }.data
+      }
+      if (userFromDB) {
+        dispatch({
+          type: authActionTypes.AUTO_LOGIN_SUCCESS,
+          payload: { credential: jwt, ...userFromDB },
+        })
+      }
+
+      return userFromDB
+    },
+    [dispatch]
+  )
+
+  const loginOrSignupWithGoogle = useCallback(
     async (response) => {
       const jwt = response.credential
 
@@ -90,7 +130,7 @@ export const AuthProvider = ({ children }) => {
       const jwt = localStorage.getItem("JWTTOKEN")
       if (jwt) {
         dispatch({ type: authActionTypes.AUTO_LOGIN_LOADING })
-        await loginOrSignupWithJWT({ credential: jwt })
+        await loginWithJWT({ credential: jwt })
       } else {
         // console.log(auth)
         // setUserFromDB(null)
@@ -98,7 +138,7 @@ export const AuthProvider = ({ children }) => {
       }
     }
     asyncWrapper()
-  }, [loginOrSignupWithJWT])
+  }, [loginWithJWT])
 
   useEffect(() => {
     if (auth.isAppLoaded) {
@@ -106,7 +146,7 @@ export const AuthProvider = ({ children }) => {
       if (window.google) {
         window.google.accounts.id.initialize({
           client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
-          callback: loginOrSignupWithJWT,
+          callback: loginOrSignupWithGoogle,
           // auto_select: true,
         })
 
@@ -122,7 +162,7 @@ export const AuthProvider = ({ children }) => {
         // }
       }
     }
-  }, [auth.isAuthenticated, auth.isAppLoaded, loginOrSignupWithJWT])
+  }, [auth.isAuthenticated, auth.isAppLoaded, loginOrSignupWithGoogle])
 
   console.log(auth)
 

@@ -2,7 +2,7 @@
 import { useContext } from "react"
 import { QuestionReadOnly } from "./QuestionReadOnly"
 import { AnswerReadOnly } from "./AnswerReadOnly"
-import { MCQReaderContext } from "../pages/MCEPage/MCQReaderContext"
+import { MCQReaderContext } from "../MCQReaderContext"
 
 export const McqReadOnly = ({ index, mcqid, mcqObject }) => {
   const mcqList = useContext(MCQReaderContext)

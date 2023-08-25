@@ -1,5 +1,5 @@
-import Button from "./Button"
 import { TbEdit } from "react-icons/tb"
+import Button from "../../../components/Button"
 
 export default function Hero() {
   return (

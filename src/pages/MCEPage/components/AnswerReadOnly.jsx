@@ -1,10 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useContext } from "react"
-import {
-  // MCQReaderContext,
-  MCQReaderDispatchContext,
-} from "../pages/MCEPage/MCQReaderContext"
-import { actions } from "../pages/MCQBuilderPage/constants"
+import { MCQReaderDispatchContext } from "../MCQReaderContext"
+import { actions } from "../../MCQBuilderPage/constants"
 
 export const AnswerReadOnly = ({
   mcqid,

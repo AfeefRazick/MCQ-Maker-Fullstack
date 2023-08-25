@@ -1,14 +1,14 @@
 /* eslint-disable react/prop-types */
 import { AiOutlinePlus, AiOutlineDelete } from "react-icons/ai"
 import { BiImageAdd, BiMessageSquareAdd, BiDuplicate } from "react-icons/bi"
-import { AnswerBuilder } from "./AnswerBuilder"
-import { QuestionBuilder } from "./QuestionBuilder"
 import { useContext } from "react"
 import {
   MCQBuilderContext,
   MCQBuilderDispatchContext,
-} from "../pages/MCQBuilderPage/MCQbuilderContext"
-import { actions } from "../pages/MCQBuilderPage/constants"
+} from "../MCQbuilderContext"
+import { actions } from "../constants"
+import { QuestionBuilder } from "./QuestionBuilder"
+import { AnswerBuilder } from "./AnswerBuilder"
 
 export const Mcq = ({ index, mcqid, mcqObject }) => {
   const mcqList = useContext(MCQBuilderContext)

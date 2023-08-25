@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react"
-import Button from "./Button"
 import { AiOutlineCloudUpload, AiOutlineEye } from "react-icons/ai"
 import { IoLinkOutline } from "react-icons/io5"
-import { ResponsiveLogo } from "./ResponsiveLogo"
+import { ResponsiveLogo } from "../../../components/ResponsiveLogo"
+import Button from "../../../components/Button"
 
 export const BuilderOptions = ({
   sendCreateMCE,

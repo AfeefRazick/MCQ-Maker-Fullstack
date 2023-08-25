@@ -12,7 +12,7 @@ export const MyMCEs = () => {
       {auth?.user?.multipleChoiceExams?.map((mce) => {
         return (
           <li key={uuidv4()} className=" py-2">
-            <div className="flex h-16 w-full items-center justify-between overflow-hidden rounded-xl bg-white px-2 md:h-[72px]  ">
+            <div className="flex h-16 w-full items-center justify-between overflow-hidden rounded-xl border border-solid border-slate-200 bg-white px-2 shadow-md hover:bg-gray-100 md:h-[72px]  ">
               <Link
                 to={import.meta.env.VITE_CLIENT_URL + "mcq-builder/" + mce._id}
                 className="flex w-5/6"

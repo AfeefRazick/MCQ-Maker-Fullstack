@@ -1,17 +1,17 @@
 import { v4 as uuidv4 } from "uuid"
 import Axios from "axios"
+import { useNavigate, useParams } from "react-router-dom"
 import { useEffect, useReducer, useState } from "react"
-import { Mcq } from "../../components/Mcq"
 import {
   MCQBuilderContext,
   MCQBuilderDispatchContext,
 } from "./MCQbuilderContext"
-import { MCQUrlModal } from "../../components/MCQUrlModal"
-import { BuilderOptions } from "../../components/BuilderOptions"
-import { actions } from "./constants"
-import { BuilderNameDesc } from "../../components/BuilderNameDesc"
 import { useAuthContext } from "../../UserContext/useAuthContext"
-import { useNavigate, useParams } from "react-router-dom"
+import { actions } from "./constants"
+import { BuilderOptions } from "./components/BuilderOptions"
+import { BuilderNameDesc } from "./components/BuilderNameDesc"
+import { Mcq } from "./components/Mcq"
+import { MCQUrlModal } from "./components/MCQUrlModal"
 
 export const MCQBuilder = () => {
   const { mceid } = useParams()

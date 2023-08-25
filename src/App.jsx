@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-import Home from "./pages/Home"
+import Home from "./pages/HomePage/Home"
 import mainlinks from "./components/Linknames"
 import { MCQBuilder } from "./pages/MCQBuilderPage/MCQBuilder"
 import { MCEPage } from "./pages/MCEPage/MCEPage"

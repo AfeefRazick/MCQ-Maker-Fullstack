@@ -4,8 +4,8 @@ import { FaTimes } from "react-icons/fa"
 import {
   MCQBuilderContext,
   MCQBuilderDispatchContext,
-} from "../pages/MCQBuilderPage/MCQbuilderContext"
-import { actions } from "../pages/MCQBuilderPage/constants"
+} from "../MCQbuilderContext"
+import { actions } from "../constants"
 
 export const AnswerBuilder = ({
   mcqid,

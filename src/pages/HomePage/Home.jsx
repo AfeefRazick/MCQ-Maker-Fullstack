@@ -1,6 +1,6 @@
-import Hero from "../components/Hero"
-import Information from "../components/Information"
-import Sidebar from "../components/Sidebar"
+import Sidebar from "../../components/Sidebar"
+import Hero from "./components/Hero"
+import Information from "./components/Information"
 
 export default function Home() {
   return (
