@@ -8,7 +8,7 @@ export const MyMCEs = () => {
   const { auth } = useAuthContext()
 
   return (
-    <ul className="h-full min-h-screen w-full py-2">
+    <ul className="h-full w-full py-2">
       {auth?.user?.multipleChoiceExams?.map((mce) => {
         return (
           <li key={uuidv4()} className=" py-2">
@@ -51,6 +51,17 @@ export const MyMCEs = () => {
           </li>
         )
       })}
+
+      {auth?.user?.multipleChoiceExams?.length === 0 && (
+        <div>
+          <h3 className="mt-10 w-full text-center text-xl text-black md:text-xl">
+            No mcq&#39;s yet
+          </h3>
+          <p className="text-center text-stone-600">
+            Click <span className="text-xl">+</span> to create mcq
+          </p>
+        </div>
+      )}
     </ul>
   )
 }

@@ -10,7 +10,6 @@ import {
   DELETE_USER_SUCCESS,
   LOGOUT_SUCCESS,
 } from "../../UserContext/authActionTypes"
-import { Link } from "react-router-dom"
 
 function MenuIcon({ click }) {
   return (
@@ -80,9 +79,7 @@ export const DashTopSide = () => {
           <MenuIcon click={handleClick} />
         </div>
         <ul className="p-3"></ul>
-        <Link className="bg-green-400" to={"/mcq-builder/new"}>
-          Create MCQ
-        </Link>
+
         <button
           className="mt-2 rounded-md bg-black py-1 text-white hover:bg-slate-900"
           onClick={logout}
