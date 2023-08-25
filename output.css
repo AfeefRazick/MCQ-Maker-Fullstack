@@ -712,6 +712,10 @@ img,
   position: relative;
 }
 
+.bottom-20{
+  bottom: 5rem;
+}
+
 .left-0{
   left: 0px;
 }
@@ -738,10 +742,6 @@ img,
 
 .top-5{
   top: 1.25rem;
-}
-
-.bottom-20{
-  bottom: 5rem;
 }
 
 .bottom-10{
