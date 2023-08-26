@@ -41,10 +41,10 @@ export const MyMCEs = () => {
         </div>
       </div>
 
-      <ul className="custom-scroll max-h-96 w-full overflow-y-scroll py-2 pr-2">
+      <ul className="custom-scroll my-2 max-h-96 w-full overflow-y-scroll pr-2">
         {auth?.user?.multipleChoiceExams?.map((mce) => {
           return (
-            <li key={uuidv4()} className=" py-2">
+            <li key={uuidv4()} className=" pb-4">
               <div className="flex h-16 w-full items-center justify-between overflow-hidden rounded-xl border border-solid border-slate-200 bg-white px-2 shadow-md hover:bg-gray-100 md:h-[72px]  ">
                 <Link
                   to={

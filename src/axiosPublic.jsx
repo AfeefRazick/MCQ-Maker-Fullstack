@@ -1,5 +1,5 @@
 import axios from "axios"
 
 export const axiosPublic = axios.create({
-  baseURL: "http://localhost:3002/",
+  baseURL: import.meta.env.VITE_SERVER_URL,
 })

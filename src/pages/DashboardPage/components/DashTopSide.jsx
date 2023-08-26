@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react"
-import axios from "axios"
 import { Link } from "react-router-dom"
 import { PiHouse } from "react-icons/pi"
 import { CgMenu } from "react-icons/cg"
@@ -12,6 +11,7 @@ import {
   DELETE_USER_SUCCESS,
   LOGOUT_SUCCESS,
 } from "../../../UserContext/authActionTypes"
+import { axiosPublic } from "../../../axiosPublic"
 
 function MenuIcon({ click }) {
   return (
@@ -28,8 +28,8 @@ export const DashTopSide = () => {
   const [show, setShow] = useState(false)
   const { auth, dispatch } = useAuthContext()
   const deleteAccount = async () => {
-    const deleteResponse = await axios.delete(
-      import.meta.env.VITE_SERVER_URL + "/user/delete/" + auth.user.credential
+    const deleteResponse = await axiosPublic.delete(
+      "user/delete/" + auth.user.credential
     )
     if (deleteResponse.data.deletedCount === 1) {
       dispatch({ type: DELETE_USER_SUCCESS })

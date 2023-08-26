@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid"
-import Axios from "axios"
+import { axiosPublic } from "../../axiosPublic"
 import { useNavigate, useParams } from "react-router-dom"
 import { useEffect, useReducer, useState } from "react"
 import {
@@ -34,30 +34,34 @@ export const MCQBuilder = () => {
 
   const sendCreateMCE = () => {
     if (!mceid) {
-      Axios.post(import.meta.env.VITE_SERVER_URL + "/mce", {
-        ownerID: auth.user._id,
-        information: information,
-        mcqArray: mcqList,
-        mcqSubmissions: [],
-      }).then((response) => {
-        console.log(response)
-        setMce_id(response.data._id)
-        setShowModal(true)
-        setUpdated(true)
-      })
+      axiosPublic
+        .post("mce", {
+          ownerID: auth.user._id,
+          information: information,
+          mcqArray: mcqList,
+          mcqSubmissions: [],
+        })
+        .then((response) => {
+          console.log(response)
+          setMce_id(response.data._id)
+          setShowModal(true)
+          setUpdated(true)
+        })
     }
   }
 
   const sendUpdateMCE = () => {
-    Axios.put(import.meta.env.VITE_SERVER_URL + "/mce", {
-      id: mce_id,
-      ownerID: auth.user._id,
-      information: information,
-      mcqArray: mcqList,
-    }).then((response) => {
-      setUpdated(true)
-      console.log(response.data)
-    })
+    axiosPublic
+      .put("mce", {
+        id: mce_id,
+        ownerID: auth.user._id,
+        information: information,
+        mcqArray: mcqList,
+      })
+      .then((response) => {
+        setUpdated(true)
+        console.log(response.data)
+      })
   }
 
   useEffect(() => {

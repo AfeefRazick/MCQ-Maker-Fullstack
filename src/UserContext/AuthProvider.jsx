@@ -3,7 +3,7 @@ import { useCallback, useEffect, useReducer } from "react"
 import { authContext } from "./authContext"
 import { Loading } from "../pages/Loading"
 import * as authActionTypes from "./authActionTypes"
-import axios from "axios"
+import { axiosPublic } from "../axiosPublic"
 
 const reducer = (auth, action) => {
   switch (action.type) {
@@ -80,17 +80,14 @@ export const AuthProvider = ({ children }) => {
       const jwt = response.credential
 
       let userFromDB = {
-        ...(await axios.get(import.meta.env.VITE_SERVER_URL + "/user/" + jwt)),
+        ...(await axiosPublic.get("user/" + jwt)),
       }.data
 
       if (!userFromDB) {
         userFromDB = {
-          ...(await axios.post(
-            import.meta.env.VITE_SERVER_URL + "/user/create",
-            {
-              credential: jwt,
-            }
-          )),
+          ...(await axiosPublic.post("user/create", {
+            credential: jwt,
+          })),
         }.data
       }
       if (userFromDB) {
@@ -110,17 +107,14 @@ export const AuthProvider = ({ children }) => {
       const jwt = response.credential
 
       let userFromDB = {
-        ...(await axios.get(import.meta.env.VITE_SERVER_URL + "/user/" + jwt)),
+        ...(await axiosPublic.get("user/" + jwt)),
       }.data
 
       if (!userFromDB) {
         userFromDB = {
-          ...(await axios.post(
-            import.meta.env.VITE_SERVER_URL + "/user/create",
-            {
-              credential: jwt,
-            }
-          )),
+          ...(await axiosPublic.post("user/create", {
+            credential: jwt,
+          })),
         }.data
       }
 

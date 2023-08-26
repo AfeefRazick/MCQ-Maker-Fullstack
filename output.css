@@ -1366,6 +1366,10 @@ img,
   padding-top: 0.5rem;
 }
 
+.pb-4{
+  padding-bottom: 1rem;
+}
+
 .text-left{
   text-align: left;
 }

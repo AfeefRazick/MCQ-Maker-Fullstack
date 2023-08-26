@@ -1,12 +1,12 @@
 import { useEffect, useState, useReducer } from "react"
 import { useParams } from "react-router-dom"
-import Axios from "axios"
 import { Loading } from "../../pages/Loading"
 import { actions } from "../MCQBuilderPage/constants"
 import { MCQReaderContext, MCQReaderDispatchContext } from "./MCQReaderContext"
 import { ReadNameDesc } from "./components/ReadNameDesc"
 import { McqReadOnly } from "./components/McqReadOnly"
 import { MCENotfound } from "../MCENotfound"
+import { axiosPublic } from "../../axiosPublic"
 
 export const MCEPage = () => {
   const { mceid } = useParams()
@@ -20,7 +20,8 @@ export const MCEPage = () => {
   })
 
   useEffect(() => {
-    Axios.get(import.meta.env.VITE_SERVER_URL + "/mce/" + mceid)
+    axiosPublic
+      .get("mce/" + mceid)
       .then((response) => {
         let data = response.data
         setLoading((prev) => {

@@ -1,8 +1,8 @@
-import axios from "axios"
 import { useCallback, useEffect } from "react"
 import { LOGIN_WITH_OAUTH_SUCCESS } from "../../UserContext/authActionTypes"
 import { useAuthContext } from "../../UserContext/useAuthContext"
 import { useNavigate } from "react-router-dom"
+import { axiosPublic } from "../../axiosPublic"
 
 export const SignUpBox = () => {
   const navigate = useNavigate()
@@ -13,17 +13,14 @@ export const SignUpBox = () => {
       const jwt = response.credential
 
       let userFromDB = {
-        ...(await axios.get(import.meta.env.VITE_SERVER_URL + "/user/" + jwt)),
+        ...(await axiosPublic.get("user/" + jwt)),
       }.data
 
       if (!userFromDB) {
         userFromDB = {
-          ...(await axios.post(
-            import.meta.env.VITE_SERVER_URL + "/user/create",
-            {
-              credential: jwt,
-            }
-          )),
+          ...(await axiosPublic.post("user/create", {
+            credential: jwt,
+          })),
         }.data
       }
 
