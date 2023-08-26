@@ -29,6 +29,7 @@ export const MCQBuilder = () => {
 
   useEffect(() => {
     setUpdated(false)
+    // can implement builder persisting data during session by mutating auth.user.mult...
   }, [mcqList, information])
 
   const sendCreateMCE = () => {
@@ -107,7 +108,7 @@ export const MCQBuilder = () => {
         setMce_id(mceid)
         // setUpdated(true)
       } else {
-        navigate("/error")
+        navigate("/builder-notfound")
         console.log("mcq builder does not exist")
       }
     }

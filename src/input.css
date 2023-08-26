@@ -40,7 +40,7 @@
     @apply cursor-pointer rounded-full bg-slate-200 p-1 text-3xl hover:bg-slate-300 active:bg-slate-400;
   }
   .icon-lg {
-    @apply h-10 w-10 cursor-pointer rounded-full p-1 text-3xl hover:bg-slate-200 active:bg-slate-400;
+    @apply h-10 w-10 cursor-pointer rounded-lg p-1 text-3xl hover:bg-slate-200 active:bg-slate-400;
   }
   .icon-highlight {
     @apply hover:bg-transparent hover:fill-cyan-500 hover:text-cyan-500;
@@ -94,6 +94,7 @@
     outline-offset: -3px;
     border-radius: 8px;
   }
+
   @keyframes border-animation {
     0% {
       outline: gray dotted 3px;
@@ -111,5 +112,22 @@
       outline: transparent dashed 3px;
       border: 3px dotted black;
     }
+  }
+
+  .custom-scroll::-webkit-scrollbar {
+    width: 8px;
+    border-radius: 20px;
+  }
+
+  .custom-scroll::-webkit-scrollbar-track {
+    border-radius: 20px;
+    background-color: rgb(231, 222, 222);
+    /* margin-top: 10px; */
+    /* margin-bottom: 10px; */
+  }
+
+  .custom-scroll::-webkit-scrollbar-thumb {
+    background: rgb(0, 0, 0, 0.2);
+    border-radius: 20px;
   }
 }

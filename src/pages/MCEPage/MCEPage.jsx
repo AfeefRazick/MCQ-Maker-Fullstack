@@ -4,9 +4,9 @@ import Axios from "axios"
 import { Loading } from "../../pages/Loading"
 import { actions } from "../MCQBuilderPage/constants"
 import { MCQReaderContext, MCQReaderDispatchContext } from "./MCQReaderContext"
-import { ErrorPage } from "../ErrorPage"
 import { ReadNameDesc } from "./components/ReadNameDesc"
 import { McqReadOnly } from "./components/McqReadOnly"
+import { MCENotfound } from "../MCENotfound"
 
 export const MCEPage = () => {
   const { mceid } = useParams()
@@ -43,7 +43,7 @@ export const MCEPage = () => {
   }, [mceid])
 
   if (loading.isLoading) return <Loading />
-  else if (loading.error) return <ErrorPage />
+  else if (loading.error) return <MCENotfound />
 
   return (
     <MCQReaderContext.Provider value={mcqList}>

@@ -50,6 +50,16 @@ const reducer = (auth, action) => {
         isAuthenticated: false,
         user: {},
       }
+    case authActionTypes.UPDATE_USER_LOADING:
+      return { ...auth, isLoading: true }
+
+    case authActionTypes.UPDATE_USER_SUCCESS:
+      return {
+        ...auth,
+        user: { ...action.payload },
+        isLoading: false,
+        isAuthenticated: true,
+      }
 
     default: {
       throw new Error(`Unhandled action type: ${action.type}`)
@@ -167,6 +177,7 @@ export const AuthProvider = ({ children }) => {
   console.log(auth)
 
   if (!auth.isAppLoaded) {
+    console.log(auth)
     return <Loading />
   }
 

@@ -1,5 +1,5 @@
-import { DashTopSide } from "./DashTopSide"
-import { DashContent } from "./DashContent"
+import { DashContent } from "./components/DashContent"
+import { DashTopSide } from "./components/DashTopSide"
 
 export const DashboardPage = () => {
   return (

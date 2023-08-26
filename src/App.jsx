@@ -6,7 +6,8 @@ import { MCEPage } from "./pages/MCEPage/MCEPage"
 import { SignUpPage } from "./pages/SignUpSignInPage/SignUpPage"
 import { DashboardPage } from "./pages/DashboardPage/DashboardPage"
 import { PrivateRoutes } from "./components/PrivateRoutes"
-import { ErrorPage } from "./pages/ErrorPage"
+import { Notfound } from "./pages/Notfound"
+import { BuilderNotfound } from "./pages/BuilderNotfound"
 
 export default function App() {
   return (
@@ -14,6 +15,10 @@ export default function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />}></Route>
+          <Route path="/home" element={<Home />}></Route>
+          <Route path="/signup" element={<SignUpPage />}></Route>
+          {/* <Route path="/loading" element={<Loading />}></Route> */}
+
           <Route element={<PrivateRoutes />}>
             <Route path="mcq/:mceid" element={<MCEPage />}></Route>
             <Route path="/mcq-builder/:mceid" element={<MCQBuilder />}></Route>
@@ -30,9 +35,11 @@ export default function App() {
               ></Route>
             )
           })}
-          <Route path="/signup" element={<SignUpPage />}></Route>
 
-          <Route path="/error" element={<ErrorPage />}></Route>
+          <Route path="/builder-notfound" element={<BuilderNotfound />}></Route>
+          {/* <Route path="/mcq-notfound" element={<MCENotfound />}></Route> */}
+
+          <Route path="*" element={<Notfound />}></Route>
         </Routes>
       </Router>
     </>
