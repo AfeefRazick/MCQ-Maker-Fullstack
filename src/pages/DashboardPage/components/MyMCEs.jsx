@@ -50,7 +50,7 @@ export const MyMCEs = () => {
                   to={
                     import.meta.env.VITE_CLIENT_URL + "mcq-builder/" + mce._id
                   }
-                  className="flex w-5/6 items-center overflow-hidden"
+                  className="flex h-full w-5/6 items-center overflow-hidden"
                 >
                   <img
                     src="/checkboxes.svg"

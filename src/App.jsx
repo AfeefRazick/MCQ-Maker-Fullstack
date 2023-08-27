@@ -8,6 +8,7 @@ import { DashboardPage } from "./pages/DashboardPage/DashboardPage"
 import { PrivateRoutes } from "./components/PrivateRoutes"
 import { Notfound } from "./pages/Notfound"
 import { BuilderNotfound } from "./pages/BuilderNotfound"
+import { SettingsPage } from "./pages/SettingsPage/SettingsPage"
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
             <Route path="/mcq-builder/:mceid" element={<MCQBuilder />}></Route>
             <Route path="/mcq-builder/new" element={<MCQBuilder />}></Route>
             <Route path="/dashboard" element={<DashboardPage />}></Route>
+            <Route path="/settings" element={<SettingsPage />}></Route>
           </Route>
 
           {mainlinks.map((link) => {

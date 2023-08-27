@@ -7,11 +7,13 @@ import { ReadNameDesc } from "./components/ReadNameDesc"
 import { McqReadOnly } from "./components/McqReadOnly"
 import { MCENotfound } from "../MCENotfound"
 import { axiosPublic } from "../../axiosPublic"
+import { useAuthContext } from "../../UserContext/useAuthContext"
 
 export const MCEPage = () => {
+  const { auth } = useAuthContext()
   const { mceid } = useParams()
   const [loading, setLoading] = useState({ isLoading: true, error: false })
-  // const [mce, setMce] = useState({})
+  const [otherInfo, setOtherInfo] = useState({})
 
   const [mcqList, dispatch] = useReducer(reducer, [])
   const [information, setInformation] = useState({
@@ -19,13 +21,24 @@ export const MCEPage = () => {
     mcqDescription: "",
   })
 
+  const submitAnswers = () => {
+    axiosPublic.post("mcqSubmission", { ...otherInfo, mcqArray: mcqList })
+  }
+
   useEffect(() => {
     axiosPublic
       .get("mce/" + mceid)
       .then((response) => {
         let data = response.data
+        console.log(data)
+
         setLoading((prev) => {
           return { ...prev, isLoading: false }
+        })
+        setOtherInfo({
+          ownerID: data.ownerID,
+          _id: data._id,
+          submitterID: auth.user._id,
         })
         dispatch({
           type: actions.SETINITIAL,
@@ -49,7 +62,7 @@ export const MCEPage = () => {
   return (
     <MCQReaderContext.Provider value={mcqList}>
       <MCQReaderDispatchContext.Provider value={dispatch}>
-        <div className="relative mt-16 flex flex-col items-center px-[4%] md:mt-20 md:px-[6%] lg:px-[8%] xl:px-[10%]">
+        <div className="relative flex flex-col items-center px-[4%] md:px-[6%] lg:px-[8%] xl:px-[10%]">
           <ReadNameDesc
             information={information}
             setInformation={setInformation}
@@ -69,6 +82,15 @@ export const MCEPage = () => {
                 />
               )
             })}
+          </div>
+
+          <div className="mb-4 flex w-full justify-end">
+            <button
+              onClick={submitAnswers}
+              className=" rounded-md bg-black px-4 py-1 font-semibold text-white hover:bg-slate-900"
+            >
+              Submit
+            </button>
           </div>
         </div>
       </MCQReaderDispatchContext.Provider>

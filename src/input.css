@@ -49,7 +49,7 @@
     @apply flex cursor-pointer items-center border-none px-5 py-2 font-rubik text-base outline-none hover:transition-all hover:duration-500 hover:ease-in-out;
   }
   .btn-nav {
-    @apply h-full text-black text-opacity-80 hover:text-opacity-100;
+    @apply h-full px-4 text-black text-opacity-80 hover:text-opacity-100;
   }
   .btn-calltoaction {
     @apply ml-3 rounded-3xl bg-black px-5 py-2 text-white hover:text-opacity-90 hover:opacity-75;

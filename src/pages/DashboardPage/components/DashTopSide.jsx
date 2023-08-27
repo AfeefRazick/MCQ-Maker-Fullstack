@@ -6,11 +6,7 @@ import { PiHouse } from "react-icons/pi"
 import { CgMenu } from "react-icons/cg"
 import { MiniLogo } from "../../../components/MiniLogo"
 import { useAuthContext } from "../../../UserContext/useAuthContext"
-import {
-  DELETE_USER_SUCCESS,
-  LOGOUT_SUCCESS,
-} from "../../../UserContext/authActionTypes"
-import { axiosPublic } from "../../../axiosPublic"
+import { LOGOUT_SUCCESS } from "../../../UserContext/authActionTypes"
 import mainlinks from "../../../components/Linknames"
 import { PinnedMCQs } from "./PinnedMCQs"
 
@@ -28,15 +24,6 @@ function MenuIcon({ click }) {
 export const DashTopSide = () => {
   const [show, setShow] = useState(false)
   const { auth, dispatch } = useAuthContext()
-
-  const deleteAccount = async () => {
-    const deleteResponse = await axiosPublic.delete(
-      "user/delete/" + auth.user.credential
-    )
-    if (deleteResponse.data.deletedCount === 1) {
-      dispatch({ type: DELETE_USER_SUCCESS })
-    }
-  }
 
   const logout = () => {
     dispatch({ type: LOGOUT_SUCCESS })
@@ -109,13 +96,6 @@ export const DashTopSide = () => {
           onClick={logout}
         >
           Log Out
-        </button>
-
-        <button
-          className="mt-80 rounded-md bg-red-600 py-1 font-semibold text-white"
-          onClick={deleteAccount}
-        >
-          Delete Account
         </button>
       </div>
     </>

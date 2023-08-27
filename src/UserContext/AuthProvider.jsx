@@ -171,7 +171,6 @@ export const AuthProvider = ({ children }) => {
   console.log(auth)
 
   if (!auth.isAppLoaded) {
-    console.log(auth)
     return <Loading />
   }
 
