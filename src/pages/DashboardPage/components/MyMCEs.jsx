@@ -12,7 +12,7 @@ export const MyMCEs = () => {
 
   return (
     <div className="w-full">
-      <div className="flex justify-between">
+      <div className="mb-2 flex justify-between">
         <h2 className="my-1 pt-2 font-poppins text-[clamp(26px,5vw,36px)] font-bold">
           My MCQ&#39;s
         </h2>
@@ -25,14 +25,14 @@ export const MyMCEs = () => {
         </Link>
       </div>
 
-      <div className="mt-4 flex justify-between">
-        <div className="relative">
+      <div className="mb-4 flex justify-between">
+        <div className="relative flex items-center">
           <input
             placeholder="Search"
             type="text"
             className="placeholder:font-roboto z-0 w-1/3 min-w-[200px] rounded-lg border border-solid border-stone-300 py-1 pl-9 pr-2 outline-none placeholder:text-stone-500 focus:shadow-md"
           />
-          <IoSearchOutline className="absolute left-2 top-2 z-10 text-xl" />
+          <IoSearchOutline className="absolute left-2 z-10 text-xl" />
         </div>
 
         <div className="flex gap-2">
@@ -59,7 +59,7 @@ export const MyMCEs = () => {
                   />
 
                   <div className=" overflow-hidden px-2 md:px-3">
-                    <h3 className="mb-1 w-full overflow-hidden text-ellipsis whitespace-nowrap font-poppins text-lg font-bold leading-none md:text-xl md:leading-none">
+                    <h3 className=" w-full overflow-hidden text-ellipsis whitespace-nowrap font-poppins text-lg font-bold md:text-xl">
                       {mce.information.name}
                     </h3>
 
