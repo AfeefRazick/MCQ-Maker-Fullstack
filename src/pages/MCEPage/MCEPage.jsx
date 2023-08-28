@@ -38,7 +38,11 @@ export const MCEPage = () => {
         setOtherInfo({
           ownerID: data.ownerID,
           _id: data._id,
-          submitterID: auth.user._id,
+          submitterInfo: {
+            id: auth.user._id,
+            name: auth.user.name,
+            email: auth.user.email,
+          },
         })
         dispatch({
           type: actions.SETINITIAL,

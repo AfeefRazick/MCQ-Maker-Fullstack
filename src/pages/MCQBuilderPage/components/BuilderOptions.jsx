@@ -21,15 +21,23 @@ export const BuilderOptions = ({
       <div className="flex h-full w-full items-center justify-between px-2 sm:w-11/12">
         <ResponsiveLogo />
 
-        <div className="flex">
+        <div className="flex items-center">
           {mceCreated && (
-            <a
-              target="blank"
-              href={import.meta.env.VITE_CLIENT_URL + "mcq/" + mce_id}
-              className="mx-2 flex items-center"
-            >
-              <AiOutlineEye className="rounded-full p-1 text-4xl hover:bg-slate-200" />
-            </a>
+            <>
+              <Button
+                linkpath={`/responses/${mce_id}`}
+                buttonStyle={"btn btn-nav px-0"}
+              >
+                Responses
+              </Button>
+              <a
+                target="blank"
+                href={import.meta.env.VITE_CLIENT_URL + "mcq/" + mce_id}
+                className="mx-2 flex items-center"
+              >
+                <AiOutlineEye className="rounded-full p-1 text-4xl hover:bg-slate-200" />
+              </a>
+            </>
           )}
           {mceCreated ? (
             <Button

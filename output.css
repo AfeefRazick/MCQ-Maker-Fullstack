@@ -882,10 +882,6 @@ img,
   margin-top: 1.25rem;
 }
 
-.mt-80{
-  margin-top: 20rem;
-}
-
 .block{
   display: block;
 }
@@ -1309,6 +1305,11 @@ img,
   padding-right: 0.75rem;
 }
 
+.px-4{
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
 .px-\[4\%\]{
   padding-left: 4%;
   padding-right: 4%;
@@ -1334,9 +1335,9 @@ img,
   padding-bottom: 0.5rem;
 }
 
-.px-4{
-  padding-left: 1rem;
-  padding-right: 1rem;
+.px-0{
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .pb-2{
@@ -1883,16 +1884,12 @@ input[type="radio"].green:checked {
     width: 91.666667%;
   }
 
-  .md\:w-\[42vw\]{
-    width: 42vw;
+  .md\:w-\[46vw\]{
+    width: 46vw;
   }
 
   .md\:w-auto{
     width: auto;
-  }
-
-  .md\:w-\[46vw\]{
-    width: 46vw;
   }
 
   @keyframes typing{

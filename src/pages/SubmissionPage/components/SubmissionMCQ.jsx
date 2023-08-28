@@ -1,9 +1,8 @@
 /* eslint-disable react/prop-types */
+import { SubmissionAnswer } from "./SubmissionAnswer"
+import { QuestionReadOnly } from "../../MCEPage/components/QuestionReadOnly"
 
-import { QuestionReadOnly } from "../../pages/MCEPage/components/QuestionReadOnly"
-import { MCEPortalAnswer } from "./MCEPortalAnswer"
-
-export const MCEPortalMCQ = ({ index, mcqid, mcqObject, mcqList }) => {
+export const SubmissionMCQ = ({ index, mcqid, mcqObject, mcqList }) => {
   // const mcqList = useContext(MCQReaderContext)
 
   return (
@@ -19,7 +18,7 @@ export const MCEPortalMCQ = ({ index, mcqid, mcqObject, mcqList }) => {
         />
         {mcqList[index].answers.map((answer, i) => {
           return (
-            <MCEPortalAnswer
+            <SubmissionAnswer
               correct={mcqObject.correctAnswerId === answer.id}
               selected={mcqObject.selectedAnswerId === answer.id}
               mcqid={mcqid}

@@ -9,6 +9,8 @@ import { PrivateRoutes } from "./components/PrivateRoutes"
 import { Notfound } from "./pages/Notfound"
 import { BuilderNotfound } from "./pages/BuilderNotfound"
 import { SettingsPage } from "./pages/SettingsPage/SettingsPage"
+import { ResponsesPage } from "./pages/ResponsesPage/ResponsesPage"
+import { SubmissionPage } from "./pages/SubmissionPage/SubmissionPage"
 
 export default function App() {
   return (
@@ -23,6 +25,16 @@ export default function App() {
           <Route element={<PrivateRoutes />}>
             <Route path="mcq/:mceid" element={<MCEPage />}></Route>
             <Route path="/mcq-builder/:mceid" element={<MCQBuilder />}></Route>
+
+            <Route path="/responses">
+              <Route index path=":mceid" element={<ResponsesPage />}></Route>
+
+              <Route
+                path=":mceid/:submitterID"
+                element={<SubmissionPage />}
+              ></Route>
+            </Route>
+
             <Route path="/mcq-builder/new" element={<MCQBuilder />}></Route>
             <Route path="/dashboard" element={<DashboardPage />}></Route>
             <Route path="/settings" element={<SettingsPage />}></Route>
