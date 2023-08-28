@@ -23,7 +23,7 @@ export const DeleteMCE = ({ mceid }) => {
       className="flex items-center"
       onClick={deleteMCE}
     >
-      <AiOutlineDelete className="icon-lg " />
+      <AiOutlineDelete className="icon-lg icon-highlight " />
     </button>
   )
 }

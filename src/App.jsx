@@ -26,7 +26,7 @@ export default function App() {
             <Route path="mcq/:mceid" element={<MCEPage />}></Route>
             <Route path="/mcq-builder/:mceid" element={<MCQBuilder />}></Route>
 
-            <Route path="/responses">
+            <Route path="/submissions">
               <Route index path=":mceid" element={<ResponsesPage />}></Route>
 
               <Route

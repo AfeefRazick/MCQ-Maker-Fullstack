@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from "uuid"
 import { Link } from "react-router-dom"
 import { AiOutlinePlus } from "react-icons/ai"
 import { MdSortByAlpha } from "react-icons/md"
+import { BsChatRightText } from "react-icons/bs"
 import { IoSearchOutline, IoListSharp } from "react-icons/io5"
 import { GetLink } from "../../../components/GetLink"
 import { DeleteMCE } from "../../../components/DeleteMCE"
@@ -70,6 +71,13 @@ export const MyMCEs = () => {
                 </Link>
 
                 <div className="flex ">
+                  <Link
+                    title="Dashboard"
+                    className="grid place-items-center"
+                    to={`/submissions/${mce._id}`}
+                  >
+                    <BsChatRightText className="icon-lg icon-highlight" />
+                  </Link>
                   <GetLink
                     link={import.meta.env.VITE_CLIENT_URL + "mcq/" + mce._id}
                   />

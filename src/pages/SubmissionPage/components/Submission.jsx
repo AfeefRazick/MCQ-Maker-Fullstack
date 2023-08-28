@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
-import { MCEPortalMCQ } from "../../../components/McePortal/MCEPortalMCQ"
 import { ReadNameDesc } from "../../MCEPage/components/ReadNameDesc"
+import { SubmissionMCQ } from "./SubmissionMCQ"
 
 export const Submission = ({ information, mcqList }) => {
   return (
@@ -14,7 +14,7 @@ export const Submission = ({ information, mcqList }) => {
       >
         {mcqList.map((mcq, index) => {
           return (
-            <MCEPortalMCQ
+            <SubmissionMCQ
               key={mcq.id}
               mcqObject={mcq}
               mcqid={mcq.id}

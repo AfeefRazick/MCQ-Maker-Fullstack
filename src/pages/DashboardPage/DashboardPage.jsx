@@ -7,7 +7,7 @@ export const DashboardPage = () => {
   //watch out on this solution, may cause unnecessary renders when other stage changes
 
   return (
-    <div className=" min-h-screen w-full">
+    <div className=" h-screen w-full">
       <DashTopSide />
       <DashContent />
     </div>

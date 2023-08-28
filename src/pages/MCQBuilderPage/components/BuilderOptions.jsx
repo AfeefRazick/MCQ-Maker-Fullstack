@@ -25,7 +25,7 @@ export const BuilderOptions = ({
           {mceCreated && (
             <>
               <Button
-                linkpath={`/responses/${mce_id}`}
+                linkpath={`/submissions/${mce_id}`}
                 buttonStyle={"btn btn-nav px-0"}
               >
                 Responses

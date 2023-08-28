@@ -6,7 +6,7 @@ export const SubmissionMCQ = ({ index, mcqid, mcqObject, mcqList }) => {
   // const mcqList = useContext(MCQReaderContext)
 
   return (
-    <div className="relative w-full bg-white">
+    <div className="relative w-full">
       <div
         className="my-3 w-full rounded-xl border border-solid border-black px-2 py-1"
         id="mcq-1"

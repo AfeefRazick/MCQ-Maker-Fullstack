@@ -1,33 +1,21 @@
-import { Link, useParams } from "react-router-dom"
 import { useAuthContext } from "../../UserContext/useAuthContext"
-import { v4 as uuidv4 } from "uuid"
+import { useUpdateUserOnLoad } from "../../hooks/useUpdateUserOnLoad"
+import { DashTopSide } from "../DashboardPage/components/DashTopSide"
+import { Loading } from "../Loading"
+import { Responses } from "./components/Responses"
 
 export const ResponsesPage = () => {
   const { auth } = useAuthContext()
-  const { mceid } = useParams()
-
-  let mcqSubmissions = auth.user.multipleChoiceExams.find((mce) => {
-    return mceid === mce._id.toString()
-  })?.mcqSubmissions
+  useUpdateUserOnLoad()
 
   return (
-    <div>
-      <div className="">
-        {mcqSubmissions?.length === 0 && (
-          <h3 className="mt-10 w-full text-center text-xl text-black md:text-xl">
-            No responses yet
-          </h3>
-        )}
-
-        {mcqSubmissions?.map((submission) => {
-          return (
-            <Link to={`${submission?.submitterInfo?.id}`} key={uuidv4()}>
-              <p>{submission?.submitterInfo?.name}</p>
-              <p>{submission?.submitterInfo?.email}</p>
-              <p>{submission?.marks}</p>
-            </Link>
-          )
-        })}
+    <div className="h-screen w-full">
+      <DashTopSide />
+      <div className="h-full w-full pt-16 md:pl-64 md:pt-20">
+        <div className="relative h-full w-full bg-slate-50 px-[4%] pr-2 sm:pr-[4%]">
+          {auth.isLoading && <Loading />}
+          <Responses />
+        </div>
       </div>
     </div>
   )
