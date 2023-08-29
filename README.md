@@ -1,7 +1,7 @@
 # MCQ-Maker-Fullstack
 Frontend of the MCQ-Maker web app
 
-```markdown
+
 # Vite React Tailwind Project
 
 ## Overview
@@ -83,7 +83,6 @@ Feel free to customize this template to suit your project's needs. You can modif
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
----
 
 **Happy coding!** 🚀
 
