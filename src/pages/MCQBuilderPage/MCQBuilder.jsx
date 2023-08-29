@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid"
 import { axiosPublic } from "../../axiosPublic"
 import { useNavigate, useParams } from "react-router-dom"
-import { useEffect, useReducer, useState } from "react"
+import { useEffect, useReducer, useRef, useState } from "react"
 import {
   MCQBuilderContext,
   MCQBuilderDispatchContext,
@@ -17,6 +17,9 @@ export const MCQBuilder = () => {
   const { mceid } = useParams()
   const navigate = useNavigate()
   const { auth } = useAuthContext()
+  const copiedMessage = useRef()
+  const messageContainer = useRef()
+
   // mcqlist object is the state that represents all the mcqs, question and answers
   const [mcqList, dispatch] = useReducer(reducer, [newMCQ()])
   const [information, setInformation] = useState({
@@ -32,70 +35,84 @@ export const MCQBuilder = () => {
     // can implement builder persisting data during session by mutating auth.user.mult...
   }, [mcqList, information])
 
+  const mceValidationMessage = (information, mcqList) => {
+    let message = ""
+
+    if (information.name === "") {
+      message = "MCQ must have name"
+    } else {
+      mcqList.map((mcq) => {
+        let answerMessage
+
+        mcq.answers.map((answer) => {
+          if (answer.text === "") {
+            answerMessage = "Answers cannot be empty"
+          }
+        })
+
+        if (mcq.question.text === "") {
+          message = "Questions cannot be empty"
+        } else if (answerMessage) {
+          message = answerMessage
+        } else if (mcq.correctAnswerId === 1) {
+          message =
+            "Make sure a correct answer has been selected for all questions"
+        }
+      })
+    }
+    if (message) {
+      copiedMessage.current.innerHTML = message
+      messageContainer.current.style.top = "70px"
+      setTimeout(() => {
+        if (messageContainer?.current?.style?.top) {
+          messageContainer.current.style.top = "-100%"
+        }
+      }, 5000)
+    }
+    return message
+  }
+
   const sendCreateMCE = () => {
     if (!mceid) {
+      const message = mceValidationMessage(information, mcqList)
+      if (message) {
+        return
+      } else {
+        axiosPublic
+          .post("mce", {
+            ownerID: auth.user._id,
+            information: information,
+            mcqArray: mcqList,
+            mcqSubmissions: [],
+          })
+          .then((response) => {
+            console.log(response)
+            setMce_id(response.data._id)
+            setShowModal(true)
+            setUpdated(true)
+          })
+      }
+    }
+  }
+  const sendUpdateMCE = () => {
+    if (mceValidationMessage(information, mcqList)) {
+      return
+    } else {
       axiosPublic
-        .post("mce", {
+        .put("mce", {
+          id: mce_id,
           ownerID: auth.user._id,
           information: information,
           mcqArray: mcqList,
-          mcqSubmissions: [],
         })
         .then((response) => {
-          console.log(response)
-          setMce_id(response.data._id)
-          setShowModal(true)
           setUpdated(true)
+          console.log(response.data)
         })
     }
   }
 
-  const sendUpdateMCE = () => {
-    axiosPublic
-      .put("mce", {
-        id: mce_id,
-        ownerID: auth.user._id,
-        information: information,
-        mcqArray: mcqList,
-      })
-      .then((response) => {
-        setUpdated(true)
-        console.log(response.data)
-      })
-  }
-
   useEffect(() => {
-    // if (mceid) {
-    //   Axios.get(import.meta.env.VITE_SERVER_URL + "/user/"+auth.user.credential)
-    //     .then((response) => {
-
-    //       let data = response.data
-    //       console.log(data)
-    //       // setLoading((prev) => {
-    //       //   return { ...prev, isLoading: false }
-    //       // })
-    //       if (data) {
-    //         dispatch({
-    //           type: actions.SETINITIAL,
-    //           payload: {
-    //             mcqList: data.mcqArray,
-    //           },
-    //         })
-    //         setInformation(data.information)
-    //         setMce_id(mceid)
-    //         // setUpdated(true)
-    //       } else {
-    //         navigate("/error")
-    //         console.log("mcq builder does not exist" + data)
-    //       }
-    //     })
-    //     .catch((err) => {
-    //       console.log(err)
-    //       // setLoading((prev) => {
-    //       //   return { ...prev, isLoading: false, error: true }
-    //       // })
-    //     })
-    // }
     if (mceid) {
       let mce = auth.user.multipleChoiceExams.find((mce) => {
         if (mce._id === mceid) return mce
@@ -162,6 +179,15 @@ export const MCQBuilder = () => {
               )
             })}
           </div>
+        </div>
+        <div
+          ref={messageContainer}
+          className="fixed top-[-100%] z-50 flex h-10 w-full justify-center  text-white transition-[top] duration-500"
+        >
+          <p
+            className="rounded-md bg-red-600 px-3 py-2 "
+            ref={copiedMessage}
+          ></p>
         </div>
       </MCQBuilderDispatchContext.Provider>
     </MCQBuilderContext.Provider>

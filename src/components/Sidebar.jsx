@@ -53,7 +53,7 @@ export default function Sidebar() {
             <Logo />
 
             <div className="hidden h-full items-center justify-end md:flex md:w-[46vw] lg:w-[48vw] xl:w-[53vw]">
-              {mainlinks.slice(1).map((link) => {
+              {mainlinks.slice(1, 4).map((link) => {
                 return (
                   <Button
                     key={link.id}

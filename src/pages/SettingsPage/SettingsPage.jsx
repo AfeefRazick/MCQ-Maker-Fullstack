@@ -17,7 +17,7 @@ export const SettingsPage = () => {
   return (
     <div>
       <button
-        className=" rounded-md bg-red-600 py-1 font-semibold text-white"
+        className="rounded-md bg-red-600 px-2 py-1 font-semibold text-white"
         onClick={deleteAccount}
       >
         Delete Account

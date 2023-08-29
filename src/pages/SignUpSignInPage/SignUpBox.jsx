@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from "react"
 import { LOGIN_WITH_OAUTH_SUCCESS } from "../../UserContext/authActionTypes"
 import { useAuthContext } from "../../UserContext/useAuthContext"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { axiosPublic } from "../../axiosPublic"
 
 export const SignUpBox = () => {
@@ -66,19 +66,55 @@ export const SignUpBox = () => {
   const handleSignUp = () => {}
 
   return (
-    <div className="flex w-11/12 max-w-lg flex-col rounded-lg border border-solid border-gray-100 p-5 shadow-lg">
-      <h1 className=" font-poppins text-3xl">Sign Up</h1>
-      <label htmlFor="email"></label>
+    <div className="mt-10 flex w-11/12 max-w-sm flex-col rounded-lg border border-solid border-gray-100 p-5 font-poppins shadow-lg">
+      <h1 className="mb-4 font-poppins text-3xl">Sign Up</h1>
+
+      <label
+        className=" mb-2 block font-poppins text-sm font-bold text-gray-700 "
+        htmlFor="email"
+      >
+        Email
+      </label>
       <input
         id="email"
         type="email"
-        placeholder="example@gmail.com"
+        placeholder="Email"
         name="email"
-        className="px-3 py-2"
+        className="mb-4 rounded-md border border-solid border-stone-300 px-3 py-1 shadow-sm outline-none focus:border-cyan-500"
       />
-      <button onClick={handleSignUp} className="">
+
+      <label
+        className="mb-2 block font-poppins text-sm font-bold text-gray-700"
+        htmlFor="email"
+      >
+        Password
+      </label>
+
+      <input
+        id="password"
+        type="password"
+        placeholder="Password"
+        name="password"
+        className="mb-4 rounded-md border border-solid border-stone-300 px-3 py-1 shadow-sm outline-none focus:border-cyan-500"
+      />
+
+      <button
+        onClick={handleSignUp}
+        className="mb-1 w-full rounded-md bg-black py-2 text-cyan-400 hover:bg-stone-800"
+      >
         Sign Up
       </button>
+      <Link
+        className="ml-auto font-lato text-sm text-blue-800 hover:underline"
+        to="/help"
+      >
+        Forgot password?
+      </Link>
+
+      <p className="my-3 flex items-center before:mx-2 before:h-px before:flex-1 before:bg-slate-400 before:content-[''] after:mx-2 after:h-px after:flex-1 after:bg-slate-400 after:content-['']">
+        OR
+      </p>
+
       <div id="buttonDiv" className="grid w-full place-items-center"></div>
     </div>
   )

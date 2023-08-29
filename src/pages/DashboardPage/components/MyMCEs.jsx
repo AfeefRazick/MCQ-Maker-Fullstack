@@ -71,16 +71,17 @@ export const MyMCEs = () => {
                 </Link>
 
                 <div className="flex ">
+                  <GetLink
+                    className="hidden items-center md:flex"
+                    link={import.meta.env.VITE_CLIENT_URL + "mcq/" + mce._id}
+                  />
                   <Link
-                    title="Dashboard"
+                    title="Submissions"
                     className="grid place-items-center"
                     to={`/submissions/${mce._id}`}
                   >
                     <BsChatRightText className="icon-lg icon-highlight" />
                   </Link>
-                  <GetLink
-                    link={import.meta.env.VITE_CLIENT_URL + "mcq/" + mce._id}
-                  />
                   <DeleteMCE mceid={mce._id} />
                 </div>
               </div>

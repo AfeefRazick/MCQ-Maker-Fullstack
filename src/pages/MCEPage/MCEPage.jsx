@@ -1,4 +1,4 @@
-import { useEffect, useState, useReducer } from "react"
+import { useEffect, useState, useReducer, useRef } from "react"
 import { useParams } from "react-router-dom"
 import { Loading } from "../../pages/Loading"
 import { actions } from "../MCQBuilderPage/constants"
@@ -14,15 +14,23 @@ export const MCEPage = () => {
   const { mceid } = useParams()
   const [loading, setLoading] = useState({ isLoading: true, error: false })
   const [otherInfo, setOtherInfo] = useState({})
-
+  const marksContainer = useRef()
   const [mcqList, dispatch] = useReducer(reducer, [])
   const [information, setInformation] = useState({
     name: "",
     mcqDescription: "",
   })
 
-  const submitAnswers = () => {
-    axiosPublic.post("mcqSubmission", { ...otherInfo, mcqArray: mcqList })
+  const submitAnswers = async () => {
+    const response = await axiosPublic.post("mcqSubmission", {
+      ...otherInfo,
+      mcqArray: mcqList,
+    })
+
+    const marks = response.data.marks
+    const totalMarks = mcqList.length
+    marksContainer.current.innerHTML = `You got ${marks}/${totalMarks} right!`
+    marksContainer.current.style.top = "0px"
   }
 
   useEffect(() => {
@@ -66,7 +74,12 @@ export const MCEPage = () => {
   return (
     <MCQReaderContext.Provider value={mcqList}>
       <MCQReaderDispatchContext.Provider value={dispatch}>
-        <div className="relative flex flex-col items-center px-[4%] md:px-[6%] lg:px-[8%] xl:px-[10%]">
+        <div
+          ref={marksContainer}
+          className="fixed top-[-50%] z-50 flex h-10 w-full items-center  justify-center rounded-b-md bg-black text-lg font-bold text-white transition-[top] duration-500"
+        ></div>
+
+        <div className="relative mt-10 flex flex-col items-center px-[4%] md:px-[6%] lg:px-[8%] xl:px-[10%]">
           <ReadNameDesc
             information={information}
             setInformation={setInformation}

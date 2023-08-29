@@ -2,7 +2,7 @@
 import { useRef } from "react"
 import { BsLink45Deg } from "react-icons/bs"
 
-export const GetLink = ({ link }) => {
+export const GetLink = ({ link, ...props }) => {
   const copiedMessage = useRef()
   return (
     <>
@@ -13,6 +13,7 @@ export const GetLink = ({ link }) => {
         Copied to clipboard
       </div>
       <button
+        {...props}
         onClick={() => {
           navigator.clipboard.writeText(link).then(() => {
             copiedMessage.current.style.bottom = "20px"
@@ -24,7 +25,7 @@ export const GetLink = ({ link }) => {
           })
         }}
         title={"Copy link to this MCQ"}
-        className=" flex items-center"
+        // className=" flex items-center"
       >
         <BsLink45Deg className="icon-lg icon-highlight" />
       </button>

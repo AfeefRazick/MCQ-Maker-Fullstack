@@ -28,7 +28,7 @@ export const BuilderOptions = ({
                 linkpath={`/submissions/${mce_id}`}
                 buttonStyle={"btn btn-nav px-0"}
               >
-                Responses
+                Submissions
               </Button>
               <a
                 target="blank"
