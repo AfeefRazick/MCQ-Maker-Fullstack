@@ -287,13 +287,6 @@ const reducer = (mcqs, action) => {
           return {
             ...mcq,
             correctAnswerId: action.payload.answerId,
-            // answers: mcq.answers.map((answer) => {
-            //   if (answer.id === action.payload.answerId) {
-            //     return { ...answer, text: action.payload.text }
-            //   } else {
-            //     return answer
-            //   }
-            // }),
           }
         } else {
           return mcq
