@@ -104,6 +104,7 @@ export const AuthProvider = ({ children }) => {
 
   const loginOrSignupWithGoogle = useCallback(
     async (response) => {
+      console.log(response)
       const jwt = response.credential
 
       let userFromDB = {
