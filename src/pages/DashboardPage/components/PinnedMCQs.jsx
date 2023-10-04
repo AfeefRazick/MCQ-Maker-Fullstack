@@ -33,7 +33,7 @@ export const PinnedMCQs = () => {
           isPinnedOpen ? " overflow-y-auto" : "max-h-[140px] overflow-hidden"
         }`}
       >
-        {mcqs.pinned.map((mce) => {
+        {mcqs?.pinned?.map((mce) => {
           return (
             <Link
               className=" flex items-center justify-between rounded-lg px-2 py-0.5 text-black hover:bg-stone-100"
@@ -45,7 +45,7 @@ export const PinnedMCQs = () => {
             </Link>
           )
         })}
-        {mcqs.unpinned.map((mce) => {
+        {mcqs?.unpinned?.map((mce) => {
           return (
             <Link
               className="rounded-lg px-2 py-0.5 text-black hover:bg-stone-100"
