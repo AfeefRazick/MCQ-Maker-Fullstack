@@ -4,6 +4,7 @@ export default {
   content: [
     "./*.{html,jsx}",
     "./src/*.{html,jsx}",
+    "./src/**/*.{html,jsx}",
     "./src/**/**/*.{html,jsx}",
     "./src/**/**/**/*.{html,jsx}",
   ],
