@@ -2,8 +2,6 @@
 Frontend of the MCQ-Maker web app
 
 
-# Vite React Tailwind Project
-
 ## Overview
 
 MCQ-Maker allows you to make a multiple choice question exam and share the link with anyone to take the exam.
