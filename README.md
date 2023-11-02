@@ -4,8 +4,7 @@ Frontend of the MCQ-Maker web app
 
 ## Overview
 
-MCQ-Maker allows you to make a multiple choice question exam and share the link with anyone to take the exam.
-The owner of the mcq can then see the submissions made, allong with the name of the pearson and their mark.
+MCQ-Maker enables you to create a multiple-choice exam and share the link with anyone to take the test. The owner of the MCQ can then view the submissions, along with the names of the persons and their marks.
 
 ## Getting Started
 
